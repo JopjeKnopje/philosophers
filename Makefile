@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/06/21 16:31:28 by joppe         ########   odam.nl          #
+#    Updated: 2023/06/21 16:55:36 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ re: fclean all
 run: all
 	$(RUN_CMD)
 
-compile_commands: dfclean fclean
+compile_commands: fclean
 	$(MAKE) | compiledb
 
 norm:
