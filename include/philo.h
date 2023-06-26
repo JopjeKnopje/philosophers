@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/21 16:42:50 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/26 15:59:16 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo {
 typedef struct s_meta {
 	t_philo **philos;
 	t_fork 	**forks;
+	char	*s;
 } t_meta;
 
 #endif

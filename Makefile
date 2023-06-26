@@ -6,28 +6,18 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/06/21 16:55:36 by joppe         ########   odam.nl          #
+#    Updated: 2023/06/26 16:05:11 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	:= app
-INCLUDE 	:= -Iinclude 
+INCLUDE := -Iinclude 
 
-######################
-# OS Dependend flags #
-######################
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
-	MLX_CFLAGS = -lglfw -lm
-	RUN_CMD = ./$(NAME)
-endif
-ifeq ($(UNAME_S),Darwin)
-	RUN_CMD = ./$(NAME)
-	CFLAGS = -DOS_MAC
-endif
+
+RUN_CMD := ./$(NAME)
 
 # CFLAGS += -Wall -Wextra -Werror
-# CFLAGS += -g -fsanitize=address
+CFLAGS += -g -fsanitize=address
 # CFLAGS = -g 
 
 SRC_DIR = src
