@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:17:25 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/28 18:50:57 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/28 18:53:43 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,8 @@ int8_t	forks_init(t_meta *meta, size_t count)
 	return (0);
 }
 
-void free_forks(t_meta *meta)
+void fork_destroy(t_fork *f)
 {
-	uint32_t i = 0;
-	
-	while (i < meta->philo_count)
-	{
-		pthread_mutex_destroy(&meta->forks[i]->mutex);
-		free(meta->forks[i]);
-		i++;
-	}
-	free(meta->forks);
+	pthread_mutex_destroy(&f->mutex);
+	free(f);
 }

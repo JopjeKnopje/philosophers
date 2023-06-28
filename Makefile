@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/06/28 18:47:24 by joppe         ########   odam.nl          #
+#    Updated: 2023/06/28 18:54:13 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = main.c \
 	   philo.c \
 	   forks.c \
 	   utils.c \
-	   test.c
+	   free.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 

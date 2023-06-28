@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/28 18:51:13 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/28 18:53:55 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_meta {
 
 // forks.c
 int8_t	forks_init(t_meta *meta, size_t count);
+void	fork_destroy(t_fork *f);
 
 // utils.c
 void	*ft_calloc(size_t nmemb, size_t size);
