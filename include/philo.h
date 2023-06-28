@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/28 18:53:55 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/28 18:58:02 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ typedef enum e_status {
 	STATUS_DEAD,
 }	t_status; 
 
+typedef enum e_forks {
+	FORKS_LEFT,
+	FORKS_RIGHT,
+	FORKS_COUNT,
+}	t_forks; 
+
 typedef struct s_fork {
 	pthread_mutex_t mutex;
 	uint32_t		id;
@@ -31,6 +37,7 @@ typedef struct s_fork {
 
 typedef struct s_philo {
 	t_status status;
+	t_status *forks[FORKS_COUNT];
 }	t_philo;
 
 typedef struct s_meta {
