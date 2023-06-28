@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   free.c                                            :+:    :+:             */
+/*   meuk.c                                            :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
-/*   Created: 2023/06/28 18:52:05 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/28 23:34:08 by joppe         ########   odam.nl         */
+/*   Created: 2023/06/28 23:34:21 by joppe         #+#    #+#                 */
+/*   Updated: 2023/06/28 23:39:41 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <stdint.h>
+#include <stdio.h>
 
-void free_forks(t_meta *meta)
+void print_philo(t_philo *p)
 {
-	uint32_t i = 0;
-	
-	while (i < meta->philo_count)
-	{
-		fork_destroy(meta->forks[i]);
-		i++;
-	}
-	free(meta->forks);
+	printf("id: %d | fork left %d | fork right %d\n", p->id, p->forks[FORK_LEFT]->id, p->forks[FORK_RIGHT]->id);
 }
 
-void free_philos(t_meta *meta)
+void print_philos(t_philo *ps[], uint32_t count)
 {
-	uint32_t i = 0;
-	
-	while (i < meta->philo_count)
+	int i = 0;
+	t_philo *p = ps[i];
+
+	while (i < count)
 	{
-		philo_destroy(meta->philos[i]);
+		p = ps[i];
 		i++;
+		print_philo(p);
 	}
-	free(meta->philos);
 }

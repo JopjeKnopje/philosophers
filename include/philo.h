@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/28 18:58:02 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/28 23:38:07 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 
 typedef enum e_status {
+	STATUS_NONE,
 	STATUS_FORK,
 	STATUS_EAT,
 	STATUS_SLEEP,
@@ -25,9 +26,9 @@ typedef enum e_status {
 }	t_status; 
 
 typedef enum e_forks {
-	FORKS_LEFT,
-	FORKS_RIGHT,
-	FORKS_COUNT,
+	FORK_LEFT,
+	FORK_RIGHT,
+	FORK_COUNT,
 }	t_forks; 
 
 typedef struct s_fork {
@@ -36,8 +37,9 @@ typedef struct s_fork {
 }	t_fork;
 
 typedef struct s_philo {
-	t_status status;
-	t_status *forks[FORKS_COUNT];
+	t_fork		*forks[FORK_COUNT];
+	t_status	status;
+	uint32_t	id;
 }	t_philo;
 
 typedef struct s_meta {
@@ -46,7 +48,9 @@ typedef struct s_meta {
 	uint32_t	philo_count;
 }	t_meta;
 
-
+// philo.c
+int8_t	philos_init(t_meta *meta, uint32_t count);
+void	philo_destroy(t_philo *p);
 
 // forks.c
 int8_t	forks_init(t_meta *meta, size_t count);
@@ -57,5 +61,10 @@ void	*ft_calloc(size_t nmemb, size_t size);
 
 // free.c
 void free_forks(t_meta *meta);
+void free_philos(t_meta *meta);
+
+// meuk.c
+void print_philos(t_philo *ps[], uint32_t count);
+void print_philo(t_philo *p);
 
 #endif
