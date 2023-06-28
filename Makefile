@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/06/26 19:27:10 by joppe         ########   odam.nl          #
+#    Updated: 2023/06/28 18:47:24 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ INCLUDE := -Iinclude
 RUN_CMD := ./$(NAME)
 
 # CFLAGS += -Wall -Wextra -Werror
+# CFLAGS += -g -fsanitize=thread
 CFLAGS += -g -fsanitize=address
 # CFLAGS = -g 
 

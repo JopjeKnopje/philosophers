@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/26 19:55:45 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/28 18:51:28 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,10 @@ int main(int argc, char *argv[])
 {
 	t_meta meta;
 
-	forks_init(&meta, FORK_COUNT);
+	meta.philo_count = FORK_COUNT;
+	forks_init(&meta, meta.philo_count);
 
-	// int i = 0;
-	// while (i < FORK_COUNT)
-	// {
-	// 	printf("i: %d | s[%s]\n", i, meta.forks[i]->s);
-	// 	free(meta.forks[i]->s);
-	// 	free(meta.forks[i]);
-	// 	i++;
-	// }
+
+	free_forks(&meta);
 	return (0);
 }
