@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/29 16:44:02 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/29 17:08:18 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,15 @@
 void *routine(void *arg)
 {
 	t_philo *philo = arg;
-	// print_philo(philo);
-	printf("test123\n");
 
+	int i = 0;
+	while (i < 10000)
+	{
+		printf("i: %d\n", i);
+		i++;
+	}
+	// print_philo(philo);
+	printf("done\n");
 	
 	return (NULL);
 }
@@ -38,9 +44,15 @@ int main(int argc, char *argv[])
 	// print_philos(meta.philos, meta.philo_count);
 
 	int i = 0;
+	meta.threads = ft_calloc(sizeof(pthread_t *), meta.philo_count);
 	while (i < meta.philo_count)
 	{
-		thread_init(&meta, &routine, &meta.philos[i]);
+		meta.threads[i] = thread_init(&meta, &routine, &meta.philos[i]);
+		if (!meta.threads[i])
+		{
+			printf("error creating threads\n");
+			return (EXIT_FAILURE);
+		}
 		i++;
 	}
 

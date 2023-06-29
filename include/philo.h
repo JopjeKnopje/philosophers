@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/29 16:43:52 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/29 16:56:11 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	fork_destroy(t_fork *f);
 void	*ft_calloc(size_t nmemb, size_t size);
 
 // thread.c
-int8_t thread_init(t_meta *meta, void *(*routine)(void *), void *arg);
-void	thread_destroy(pthread_t *t);
+pthread_t	*thread_init(t_meta *meta, void *(*routine)(void *), void *arg);
+void		thread_destroy(pthread_t *t);
 
 // free.c
 void free_forks(t_meta *meta);
