@@ -6,13 +6,15 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/29 17:08:18 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/29 17:39:01 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <threads.h>
+#include <unistd.h>
 #include "philo.h"
 
 #define FORK_COUNT 5
@@ -21,16 +23,31 @@ void *routine(void *arg)
 {
 	t_philo *philo = arg;
 
+	print_philo(philo);
+
 	int i = 0;
-	while (i < 10000)
+	while (i < 10)
 	{
 		printf("i: %d\n", i);
 		i++;
 	}
-	// print_philo(philo);
 	printf("done\n");
 	
 	return (NULL);
+}
+
+void *test_func(void *arg)
+{
+	t_philo *p = arg;
+
+	print_philo(p);
+
+	return (arg);
+}
+
+void run_func(void *(*func) (void *), void *arg)
+{
+	(*func)(arg);
 }
 
 int main(int argc, char *argv[]) 
@@ -41,18 +58,17 @@ int main(int argc, char *argv[])
 	forks_init(&meta, meta.philo_count);
 	philos_init(&meta, meta.philo_count);
 
-	// print_philos(meta.philos, meta.philo_count);
-
 	int i = 0;
 	meta.threads = ft_calloc(sizeof(pthread_t *), meta.philo_count);
 	while (i < meta.philo_count)
 	{
-		meta.threads[i] = thread_init(&meta, &routine, &meta.philos[i]);
+		meta.threads[i] = thread_init(&meta, &routine, meta.philos[i]);
 		if (!meta.threads[i])
 		{
 			printf("error creating threads\n");
 			return (EXIT_FAILURE);
 		}
+		usleep(1 * 1000000 / 2);
 		i++;
 	}
 
