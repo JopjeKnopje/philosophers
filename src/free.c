@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 18:52:05 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/28 23:34:08 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/29 16:43:47 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,16 @@ void free_philos(t_meta *meta)
 		i++;
 	}
 	free(meta->philos);
+}
+
+void free_threads(t_meta *meta)
+{
+	uint32_t i = 0;
+	
+	while (i < meta->philo_count)
+	{
+		thread_destroy(meta->threads[i]);
+		i++;
+	}
+	free(meta->threads);
 }
