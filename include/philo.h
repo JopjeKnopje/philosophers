@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/29 17:24:23 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/29 17:44:00 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ typedef struct s_philo {
 
 typedef struct s_meta {
 	t_philo		**philos;
-	bool 		start;
 	t_fork		**forks;
 	pthread_t	**threads;
 	uint32_t	philo_count;

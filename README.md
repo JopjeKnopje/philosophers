@@ -10,6 +10,9 @@
 
 * Each philosopher has a `fork[left]` and `fork[right]` pointer.
 
+## TODO
+- [ ] Maybe sync the start of each thread after creation.
+
 
 ## Stuff to learn
 

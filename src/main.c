@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/29 17:39:01 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/29 17:44:33 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,6 @@ void *routine(void *arg)
 	return (NULL);
 }
 
-void *test_func(void *arg)
-{
-	t_philo *p = arg;
-
-	print_philo(p);
-
-	return (arg);
-}
-
-void run_func(void *(*func) (void *), void *arg)
-{
-	(*func)(arg);
-}
-
 int main(int argc, char *argv[]) 
 {
 	t_meta meta;
@@ -57,6 +43,7 @@ int main(int argc, char *argv[])
 	meta.philo_count = FORK_COUNT;
 	forks_init(&meta, meta.philo_count);
 	philos_init(&meta, meta.philo_count);
+
 
 	int i = 0;
 	meta.threads = ft_calloc(sizeof(pthread_t *), meta.philo_count);
