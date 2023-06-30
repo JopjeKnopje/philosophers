@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/30 13:04:04 by joppe         ########   odam.nl         */
+/*   Updated: 2023/06/30 13:12:01 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ int main(int argc, char *argv[])
 
 	gettimeofday(&tv1, &tz);
 
-	usleep(1000);
+	usleep(100000);
 	// sleep(1);
 
 	gettimeofday(&tv2, &tz);
 	delta = (tv2.tv_usec) - (tv1.tv_usec);
-	// delta = (tv2.tv_sec + tv2.tv_usec) - (tv1.tv_sec + tv1.tv_usec);
 	printf("delta %ld\n", delta);
 
 
