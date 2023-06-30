@@ -14,6 +14,12 @@
 - [ ] Maybe sync the start of each thread after creation.
 
 
+## References
+
+### Mutexes
+https://stackoverflow.com/a/40880980
+
+
 ## Stuff to learn
 
 `pthread_create`
