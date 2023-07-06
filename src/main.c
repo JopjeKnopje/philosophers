@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/06 16:38:47 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/07 00:50:10 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,20 @@
 #include <time.h>
 #include <unistd.h>
 #include "philo.h"
+#include "timer.h"
 
 int main(int argc, char *argv[]) 
 {
+	t_timer *timer = timer_init();
 
-	struct timeval tv1;
-	struct timeval tv2;
-	struct timeval delta;
-	struct timezone tz;
+	timer_start(timer);
 
-	bzero(&tv1, sizeof(struct timeval));
-	bzero(&tv2, sizeof(struct timeval));
-	bzero(&tz, sizeof(struct timezone));
-
-	signed long delta_s;
-	signed long delta_us;
-
-	gettimeofday(&tv1, &tz);
-
-	sleep(1);
+	// sleep(1);
 	usleep(100000);
 
-	gettimeofday(&tv2, &tz);
-	delta.tv_sec = (tv2.tv_sec) - (tv1.tv_sec);
-	delta.tv_usec = (tv2.tv_usec) - (tv1.tv_usec);
-
-
-	printf("delta s %ld | delta us %ld\n", delta.tv_sec, delta.tv_usec);
+	t_timeval *delta = timer_delta(timer);
+	printf("d s %ld | d us %ld\n", delta->tv_sec, delta->tv_usec);
+	timer_free(timer);
 
 
 
