@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/07 21:17:46 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/07 22:10:56 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,37 @@ int main(int argc, char *argv[])
 	}
 
 	t_timer *t = timer_init();
+	t_timer *main_timer = timer_init();
 
-	usleep(1000000);
-	t_timeval *delta = timer_delta(t);
-	printf("delta %ld\n", delta->tv_usec);
-	timer_free(t);
+	timer_start(main_timer);
+
+	// const long WAIT_TIME = 1000000;
+	const long WAIT_TIME = 10000;
+	i = 1;
+
+	timer_start(t);
+
+	signed long sum = 0;
 
 	free_threads(&meta);
 	free_philos(&meta);
 	free_forks(&meta);
+
+	while (sum < WAIT_TIME)
+	{
+		usleep(abs((WAIT_TIME / 2) - sum));
+		sum += timer_delta(t)->tv_usec;
+		printf("sum %d | i: %d\n", sum, i);
+		i++;
+	}
+
+
+
+	printf("main_timer delta %d\n", timer_delta(main_timer)->tv_usec);
+	printf("target time %ld\n", WAIT_TIME);
+
+	timer_free(main_timer);
+	timer_free(t);
+
 	return (0);
 }
