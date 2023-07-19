@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/29 16:54:03 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/19 18:37:01 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,5 @@ void	philo_destroy(t_philo *p)
 {
 	free(p->forks);
 }
+
+
