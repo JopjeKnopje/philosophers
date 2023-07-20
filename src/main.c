@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 15:33:57 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/20 16:54:07 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void monitor(t_meta *meta)
 		}
 		i++;
 	}
-	// is philo dead
-
 }
 
 int main(int argc, char *argv[]) 

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/20 13:52:26 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 15:33:21 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/20 16:54:47 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static int8_t philo_take_fork(t_fork *f)
 {
-	if (!pthread_mutex_lock(&f->mutex));
+	if (!pthread_mutex_lock(&f->mutex))
 	{
 		return (1);
 	}
@@ -29,7 +29,7 @@ void philo_eat(t_philo *p)
 {
 	philo_take_fork(p->forks[PHILO_FORK_RIGHT]);
 	philo_take_fork(p->forks[PHILO_FORK_LEFT]);
-	printf("philo ");
+	timer_start(p->timer);
 
 }
 

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 15:31:49 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/20 16:53:25 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_fork {
 
 typedef struct s_philo {
 	t_fork		*forks[PHILO_FORK_COUNT];
+	t_timer 	*timer;
 	t_status	status;
 	uint32_t	id;
 }	t_philo;
