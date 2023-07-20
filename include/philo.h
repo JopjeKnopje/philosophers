@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 13:35:43 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/20 15:31:49 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #define PHILO_H
 
 #include <stdint.h>
+#include <pthread.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "timer.h"
 
 typedef enum e_status {
 	STATUS_NONE,
@@ -44,6 +46,7 @@ typedef struct s_philo {
 }	t_philo;
 
 typedef struct s_meta {
+	t_timer 	*timer_sim;
 	t_philo		**philos;
 	t_fork		**forks;
 	pthread_t	**threads;
@@ -54,12 +57,16 @@ typedef struct s_meta {
 int8_t	philos_init(t_meta *meta, uint32_t count);
 void	philo_destroy(t_philo *p);
 
+// philo_action.c
+int8_t	philo_is_dead(t_timer *t, t_philo *p);
+
 // forks.c
 int8_t	forks_init(t_meta *meta, size_t count);
 void	fork_destroy(t_fork *f);
 
 // utils.c
 void	*ft_calloc(size_t nmemb, size_t size);
+long	get_time(void);
 
 // thread.c
 int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);

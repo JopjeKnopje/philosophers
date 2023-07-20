@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/19 09:16:42 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 13:14:49 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/20 15:34:49 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,15 @@ unsigned long	timer_stop(t_timer *t)
 	return (t->end);
 }
 
-unsigned long	timer_delta(t_timer *t)
+unsigned long	timer_delta(t_timer *t, bool stop)
 {
-	timer_stop(t);
-	t->delta = t->end - t->start;
+	if (stop)
+	{
+		timer_stop(t);
+		t->delta = t->end - t->start;
+	}
+	else 
+		t->delta = get_time() - t->start;
+			
 	return (t->delta);
 }

@@ -6,15 +6,15 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 13:52:12 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/20 15:33:57 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <bits/types/struct_timeval.h>
 #include <pthread.h>
+#include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <threads.h>
 #include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
@@ -29,10 +29,28 @@ void *routine(void *arg)
 
 	print_philo(philo);
 
-
 	
 	
 	return (NULL);
+}
+
+void monitor(t_meta *meta)
+{
+	uint32_t	i;
+
+	timer_start(meta->timer_sim);
+
+	i = 0;
+	while (i < meta->philo_count) 
+	{
+		if (philo_is_dead(meta->timer_sim, meta->philos[i]))
+		{
+		
+		}
+		i++;
+	}
+	// is philo dead
+
 }
 
 int main(int argc, char *argv[]) 
@@ -43,6 +61,11 @@ int main(int argc, char *argv[])
 	forks_init(&meta, meta.philo_count);
 	philos_init(&meta, meta.philo_count);
 	threads_init(&meta, routine, meta.philo_count);
+
+	meta.timer_sim = timer_init();
+
+
+	monitor(&meta);
 
 
 	free_threads(&meta);
