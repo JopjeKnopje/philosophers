@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/29 16:54:03 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/20 13:41:53 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_philo *philo_init(t_fork *forks[], uint32_t count, uint32_t id)
 	p = ft_calloc(sizeof(t_philo), 1);
 	if (!p)
 		return (NULL);
-	p->id = id;
+	p->id = id + 1;
 	p->status = STATUS_NONE;
-	p->forks[FORK_LEFT] = forks[id];
-	p->forks[FORK_RIGHT] = forks[(id + 1) % count];
+	p->forks[PHILO_FORK_LEFT] = forks[id];
+	p->forks[PHILO_FORK_RIGHT] = forks[(id + 1) % count];
 	return (p);
 }
 
