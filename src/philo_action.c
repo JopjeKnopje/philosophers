@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   utils.c                                           :+:    :+:             */
+/*   philo_action.c                                    :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
-/*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 15:20:39 by jboeve        ########   odam.nl         */
+/*   Created: 2023/07/20 13:52:26 by joppe         #+#    #+#                 */
+/*   Updated: 2023/07/21 13:13:57 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <string.h>
-#include <sys/time.h>
+#include "timer.h"
+#include <pthread.h>
+#include <stdint.h>
+#include <stdio.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+static void philo_eat(t_philo *p)
 {
-	size_t	buf_size;
-	void	*buffer;
-
-	buf_size = nmemb * size;
-	buffer = malloc(buf_size);
-	if (buffer)
-		memset(buffer, 0, buf_size);
-	else
-		return (NULL);
-	return (buffer);
+	timer_start(p->timer);
+	// TODO Log
 }
 
-long get_time(void)
+void *philo_routine(void *arg)
 {
-	struct timeval tv;
+	t_philo *philo = arg;
 
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * MICRO_TO_SECOND) + tv.tv_usec);
+	// print_philo(philo);
+	
+	return (NULL);
 }

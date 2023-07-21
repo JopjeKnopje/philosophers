@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   utils.c                                           :+:    :+:             */
+/*   monitor.c                                         :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
-/*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 15:20:39 by jboeve        ########   odam.nl         */
+/*   Created: 2023/07/20 16:54:47 by joppe         #+#    #+#                 */
+/*   Updated: 2023/07/21 13:42:46 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <string.h>
-#include <sys/time.h>
+#include <stdio.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void monitor(t_meta *meta)
 {
-	size_t	buf_size;
-	void	*buffer;
+	uint32_t	LOOPS = 6;
 
-	buf_size = nmemb * size;
-	buffer = malloc(buf_size);
-	if (buffer)
-		memset(buffer, 0, buf_size);
-	else
-		return (NULL);
-	return (buffer);
+	uint32_t	i;
+	uint32_t	parity = 0;
+	t_philo		*p;
+
+	timer_start(meta->timer_sim);
+
+	while (LOOPS) 
+	{
+		i = 0;
+		while (i < meta->philo_count)
+		{
+			p = meta->philos[i];
+			if (p && philo_is_dead(p, meta->timer_sim, meta->time_to_die))
+			{
+				philo_destroy(p);
+				meta->philos[i] = NULL;
+			}
+			i++;
+		}
+		printf("\n");
+		LOOPS--;
+	}
 }
 
-long get_time(void)
-{
-	struct timeval tv;
-
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * MICRO_TO_SECOND) + tv.tv_usec);
-}
