@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/07/20 16:55:49 by joppe         ########   odam.nl          #
+#    Updated: 2023/07/21 11:29:03 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_DIR = src
 SRCS = main.c \
 	   philo.c \
 	   philo_action.c \
+	   philo_probe.c \
 	   forks.c \
 	   utils.c \
 	   free.c \

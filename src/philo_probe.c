@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   philo_action.c                                    :+:    :+:             */
+/*   philo_probe.c                                     :+:    :+:             */
 /*                                                    +:+                     */
-/*   By: joppe <jboeve@student.codam.nl>             +#+                      */
+/*   By: jboeve <marvin@42.fr>                       +#+                      */
 /*                                                  +#+                       */
-/*   Created: 2023/07/20 13:52:26 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/21 13:13:57 by jboeve        ########   odam.nl         */
+/*   Created: 2023/07/21 11:28:32 by jboeve        #+#    #+#                 */
+/*   Updated: 2023/07/21 13:37:19 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include "timer.h"
-#include <pthread.h>
-#include <stdint.h>
 #include <stdio.h>
 
-static void philo_eat(t_philo *p)
+int8_t philo_is_dead(t_philo *p, t_timer *sim_timer, uint32_t time_to_die)
 {
-	timer_start(p->timer);
-	// TODO Log
-}
+	long delta;
+	int8_t is_dead;
 
-void *philo_routine(void *arg)
-{
-	t_philo *philo = arg;
+	delta = timer_delta(p->timer, false);
 
-	// print_philo(philo);
-	
-	return (NULL);
+	is_dead = (delta > time_to_die);
+	if (is_dead)
+		philo_set_status(p, sim_timer, STATUS_DEAD);
+	return (is_dead);
 }

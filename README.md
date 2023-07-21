@@ -41,6 +41,7 @@
 
 ## TODO
 - [ ] Maybe sync the start of each thread after creation.
+- [ ] Maybe print the `has died` message from the thread itself.
 
 
 ## References

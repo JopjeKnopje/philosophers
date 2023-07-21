@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/21 11:10:25 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/21 13:39:36 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef enum e_status {
 	STATUS_THINK,
 	STATUS_DEAD,
 }	t_status; 
+
+static const char *LOG_TEXT[] = {
+	"%ld %d NONE\n",
+	"%ld %d has taken a fork\n",
+	"%ld %d is eating\n",
+	"%ld %d is sleeping\n",
+	"%ld %d is thinking\n",
+	"%ld %d died\n",
+};
 
 typedef enum e_philo_fork {
 	PHILO_FORK_LEFT,
@@ -52,14 +61,19 @@ typedef struct s_meta {
 	t_fork		**forks;
 	pthread_t	**threads;
 	uint32_t	philo_count;
+	uint32_t 	time_to_die;
 }	t_meta;
 
 // philo.c
 int8_t	philos_init(t_meta *meta, uint32_t count);
 void	philo_destroy(t_philo *p);
+void philo_set_status(t_philo *p, t_timer *sim_timer, t_status s);
 
 // philo_action.c
-int8_t	philo_is_dead(t_timer *t, t_philo *p);
+void	*philo_routine(void *arg);
+
+// philo_probe.c
+int8_t philo_is_dead(t_philo *p, t_timer *sim_timer, uint32_t time_to_die);
 
 // forks.c
 int8_t	forks_init(t_meta *meta, size_t count);
