@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/20 13:52:26 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/21 10:40:02 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/21 11:10:41 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ static int8_t philo_take_fork(t_fork *f)
 
 void philo_eat(t_philo *p)
 {
-	philo_take_fork(p->forks[PHILO_FORK_RIGHT]);
-	philo_take_fork(p->forks[PHILO_FORK_LEFT]);
+	// philo_take_fork(p->forks[PHILO_FORK_RIGHT]);
+	// philo_take_fork(p->forks[PHILO_FORK_LEFT]);
 	timer_start(p->timer);
-
 }
 
-int8_t philo_is_dead(t_timer *t, t_philo *p)
+int8_t philo_is_dead(t_timer *sim_timer, t_philo *p)
 {
 	// TODO check if dead.
 	long delta;

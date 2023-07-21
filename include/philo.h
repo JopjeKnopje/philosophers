@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/21 10:45:20 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/21 11:10:25 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ long	get_time(void);
 // thread.c
 int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);
 void	thread_destroy(pthread_t *t);
+
+// monitor.c
+void	monitor(t_meta *meta);
 
 // free.c
 void	free_forks(t_meta *meta);

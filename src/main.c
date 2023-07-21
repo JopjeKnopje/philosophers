@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 16:54:07 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/20 17:05:33 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,15 @@
 #include "philo.h"
 #include "timer.h"
 
-#define FORK_COUNT 5
+#define FORK_COUNT 7
 
 void *routine(void *arg)
 {
 	t_philo *philo = arg;
 
-	print_philo(philo);
-
-	
+	// print_philo(philo);
 	
 	return (NULL);
-}
-
-void monitor(t_meta *meta)
-{
-	uint32_t	i;
-
-	timer_start(meta->timer_sim);
-
-	i = 0;
-	while (i < meta->philo_count) 
-	{
-		if (philo_is_dead(meta->timer_sim, meta->philos[i]))
-		{
-		
-		}
-		i++;
-	}
 }
 
 int main(int argc, char *argv[]) 
@@ -66,6 +47,7 @@ int main(int argc, char *argv[])
 	monitor(&meta);
 
 
+	free(meta.timer_sim);
 	free_threads(&meta);
 	free_philos(&meta);
 	free_forks(&meta);
