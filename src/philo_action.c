@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/20 13:52:26 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 16:54:47 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/21 10:40:02 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void philo_eat(t_philo *p)
 int8_t philo_is_dead(t_timer *t, t_philo *p)
 {
 	// TODO check if dead.
-	printf("%ld %d died\n", timer_delta(t, false), p->id);
+	long delta;
+
+	delta = timer_delta(t, false);
+	if (delta > meta.)
+	printf("%ld %d died\n", delta, p->id);
 	return (1);
 }
