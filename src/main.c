@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 22:44:07 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 23:18:27 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ int main(int argc, char *argv[])
 	t_meta meta;
 
 	meta.args.philo_count = FORK_COUNT;
-	meta.args.eat_threshold = 100;
+	meta.args.eat_threshold = 100000;
 	forks_init(&meta, meta.args.philo_count);
 	philos_init(&meta, meta.args.philo_count);
+
+	meta.clock = timer_init();
+	timer_start(meta.clock);
+	pthread_mutex_init(&meta.print_mutex, NULL);
 
 	threads_init(&meta, philo_main, meta.args.philo_count);
 
@@ -39,15 +43,15 @@ int main(int argc, char *argv[])
 	monitor(&meta);
 
 
-
 	free_forks(&meta);
-
 
 
 	// meuk.c
 	// sleep(1);
 	free_threads(&meta);
 	free_philos(&meta);
+	timer_free(meta.clock);
+	pthread_mutex_destroy(&meta.print_mutex);
 
 
 	return (0);

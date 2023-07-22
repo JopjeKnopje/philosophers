@@ -6,12 +6,13 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/29 16:18:14 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 21:07:18 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 23:16:02 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pthread.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "meta.h"
 
@@ -49,6 +50,10 @@ int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count)
 
 void	thread_destroy(pthread_t *t)
 {
-	pthread_join(*t, NULL);
+	uint32_t *id;
+	pthread_join(*t, (void **) &id);
+	printf("joined id %d\n", *id);
+	free(id);
+
 	free(t);
 }
