@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 23:58:03 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:07:58 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 
 void monitor(t_meta *meta)
 {
-	uint32_t i;
 	t_philo *p;
-	uint32_t t_count = meta->args.philo_count;
+	uint32_t i;
+	uint32_t t_count;
 	
+
+	t_count = meta->args.philo_count;
 	while (t_count)
 	{
 		i = 0;

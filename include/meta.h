@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 23:31:28 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:05:16 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_meta {
 	pthread_t 	**threads;
 	t_timer 	*clock;
 	pthread_mutex_t print_mutex;
+	pthread_mutex_t start_mutex;
 	t_args 		args;
 }	t_meta;
 

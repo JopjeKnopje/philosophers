@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 23:43:43 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:09:13 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ int8_t	philos_init(t_meta *meta, uint32_t count)
 void *philo_main(void *arg)
 {
 	t_philo *p = arg;
+
+	pthread_mutex_lock(&p->meta->start_mutex);
+	pthread_mutex_unlock(&p->meta->start_mutex);
+
 
 	while (p->status != STATUS_DEAD) 
 	{
