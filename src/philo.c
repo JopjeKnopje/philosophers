@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 23:17:00 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 23:43:43 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,13 @@ void *philo_main(void *arg)
 		if (timer_delta(p->eat_timer, false) >= p->meta->args.eat_threshold)
 		{
 			philo_set_status(p, STATUS_DEAD);
+			break;
 		}
 	}
-	uint32_t *id = ft_calloc(sizeof(uint32_t), 1);
-	*id = p->id;
-	return (id);
+	// uint32_t *id = ft_calloc(sizeof(uint32_t), 1);
+	// *id = p->id;
+	// return (id);
+	return (p);
 }
 
 void	philo_destroy(t_philo *p)

@@ -51,6 +51,9 @@
 https://stackoverflow.com/a/40880980
 
 
+### Volitile and atomic
+https://stackoverflow.com/questions/53032354/does-atomic-read-guarantees-reading-of-the-latest-value
+
 ## Stuff to learn
 
 `pthread_create`
