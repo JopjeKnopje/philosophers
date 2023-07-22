@@ -6,12 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:17:25 by joppe         #+#    #+#                 */
-/*   Updated: 2023/06/28 18:53:43 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 20:59:11 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include <pthread.h>
+#include "meta.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>

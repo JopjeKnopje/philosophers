@@ -6,11 +6,13 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 23:34:21 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 13:38:38 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 21:15:24 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "meta.h"
+#include <bits/pthreadtypes.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -31,3 +33,29 @@ void print_philos(t_philo *ps[], uint32_t count)
 		print_philo(p);
 	}
 }
+
+void free_philos(t_meta *meta)
+{
+	uint32_t i = 0;
+
+	while (i < meta->args.philo_count)
+	{
+		philo_destroy(meta->philos[i]);
+		i++;
+	}
+	free(meta->philos);
+}
+
+void free_threads(t_meta *meta)
+{
+	uint32_t i = 0;
+
+	while (i < meta->args.philo_count)
+	{
+		thread_destroy(meta->threads[i]);
+		i++;
+	}
+	free(meta->threads);
+}
+
+

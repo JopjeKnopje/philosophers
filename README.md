@@ -42,6 +42,7 @@
 ## TODO
 - [ ] Maybe sync the start of each thread after creation.
 - [ ] Maybe print the `has died` message from the thread itself.
+- [ ] In `thread.c:43` free all the thread before the current one, if allocation fails.
 
 
 ## References

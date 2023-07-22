@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   philo.h                                           :+:    :+:             */
+/*   meta.h                                            :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 20:41:38 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 21:32:38 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 #define PHILO_H
 
+#include "timer.h"
 #include <stdint.h>
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "timer.h"
 
 typedef enum e_status {
 	STATUS_NONE,
@@ -48,6 +48,8 @@ typedef struct s_fork {
 	uint32_t		id;
 }	t_fork;
 
+typedef void t_philo1;
+
 typedef struct s_philo {
 	t_fork		*forks[PHILO_FORK_COUNT];
 	t_timer 	*timer;
@@ -64,6 +66,7 @@ typedef struct s_args {
 typedef struct s_meta {
 	t_philo		**philos;
 	t_fork		**forks;
+	pthread_t 	**threads;
 	t_args 		args;
 }	t_meta;
 
@@ -75,9 +78,27 @@ void	fork_destroy(t_fork *f);
 void	*ft_calloc(size_t nmemb, size_t size);
 long	get_time(void);
 
+// philo.c
+int8_t	philos_init(t_meta *meta, uint32_t count);
+void	*philo_main(void *arg);
+void	philo_destroy(t_philo *p);
+
+// threads.c
+int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);
+void	thread_destroy(pthread_t *t);
+
+
+// monitor.c
+void monitor(t_meta *meta);
+
+// free.c
+void free_forks(t_meta *meta);
+
 
 // meuk.c
 void	print_philos(t_philo *ps[], uint32_t count);
 void	print_philo(t_philo *p);
+void	free_philos(t_meta *meta);
+void	free_threads(t_meta *meta);
 
 #endif
