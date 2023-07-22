@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/21 13:39:36 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/07/22 20:41:38 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,17 @@ typedef struct s_philo {
 	uint32_t	id;
 }	t_philo;
 
-typedef struct s_meta {
-	t_timer 	*timer_sim;
-	t_philo		**philos;
-	t_fork		**forks;
-	pthread_t	**threads;
+typedef struct s_args {
 	uint32_t	philo_count;
 	uint32_t 	time_to_die;
+
+} t_args;
+
+typedef struct s_meta {
+	t_philo		**philos;
+	t_fork		**forks;
+	t_args 		args;
 }	t_meta;
-
-// philo.c
-int8_t	philos_init(t_meta *meta, uint32_t count);
-void	philo_destroy(t_philo *p);
-void philo_set_status(t_philo *p, t_timer *sim_timer, t_status s);
-
-// philo_action.c
-void	*philo_routine(void *arg);
-
-// philo_probe.c
-int8_t philo_is_dead(t_philo *p, t_timer *sim_timer, uint32_t time_to_die);
 
 // forks.c
 int8_t	forks_init(t_meta *meta, size_t count);
@@ -83,17 +75,6 @@ void	fork_destroy(t_fork *f);
 void	*ft_calloc(size_t nmemb, size_t size);
 long	get_time(void);
 
-// thread.c
-int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);
-void	thread_destroy(pthread_t *t);
-
-// monitor.c
-void	monitor(t_meta *meta);
-
-// free.c
-void	free_forks(t_meta *meta);
-void	free_philos(t_meta *meta);
-void	free_threads(t_meta *meta);
 
 // meuk.c
 void	print_philos(t_philo *ps[], uint32_t count);
