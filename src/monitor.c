@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 23:47:14 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 23:58:03 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,25 @@
 
 void monitor(t_meta *meta)
 {
-	t_timer *t = timer_init();
 	uint32_t i;
 	t_philo *p;
+	uint32_t t_count = meta->args.philo_count;
 	
-	timer_start(t);
-	while (timer_delta(t, false) >= 1000000)
+	while (t_count)
 	{
-		// check all threads, and join them if philo is dead.
 		i = 0;
 		while (i < meta->args.philo_count)
 		{
 			p = meta->philos[i];
-			if (p->status == STATUS_DEAD)
+			pthread_mutex_lock(&p->meta->print_mutex);
+			t_status s = p->status;
+			pthread_mutex_unlock(&p->meta->print_mutex);
+			if (s)
 			{
 				thread_destroy(meta->threads[i]);
+				t_count--;
 			}
 			i++;
 		}
 	}
-	timer_free(t);
 }
