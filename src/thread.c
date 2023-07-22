@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/29 16:18:14 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 01:27:41 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 01:56:20 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	thread_destroy(pthread_t *t)
 {
 	t_philo *p;
 	pthread_join(*t, (void **) &p);
-	// printf("joined id %d\n", p->id);
+	printf("joined id %d | group %s\n", p->id, GROUP_TEXT[p->group]);
 	free(t);
 }

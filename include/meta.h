@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:52:52 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 01:56:40 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ typedef enum e_status {
 	STATUS_THINK,
 	STATUS_DEAD,
 }	t_status; 
+
+typedef enum e_group {
+	EATING_LAST,
+	EATING_ODD,
+	EATING_EVEN,
+} t_group;
+
+static const char *GROUP_TEXT[] = {
+	"LAST",
+	"ODD",
+	"EVEN",
+};
 
 static const char *LOG_TEXT[] = {
 	"%ld %d DESTROYED \n",
@@ -58,6 +70,7 @@ typedef struct s_meta t_meta;
 typedef struct s_philo {
 	t_meta 		*meta;
 
+	t_group 	group;
 	t_fork		*forks[PHILO_FORK_COUNT];
 	t_timer 	*eat_timer;
 	t_status	status;
@@ -72,6 +85,7 @@ typedef struct s_meta {
 	pthread_mutex_t status_mutex;
 	pthread_mutex_t start_mutex;
 	t_args 		args;
+	t_group 	active_group;
 }	t_meta;
 
 // forks.c

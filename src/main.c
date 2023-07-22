@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 01:21:25 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 01:55:58 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 
 #define FORK_COUNT 5
 
-int main(int argc, char *argv[]) 
+
+int philosophers(int argc, char *argv[]) 
 {
 	t_meta meta;
 
@@ -55,4 +56,8 @@ int main(int argc, char *argv[])
 
 
 	return (0);
+}
+int main(int argc, char *argv[])
+{
+	return (philosophers(argc, argv));
 }
