@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                       ::::::::             */
-/*   monitor.c                                         :+:    :+:             */
+/*   philo_action.c                                    :+:    :+:             */
 /*                                                    +:+                     */
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
-/*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 22:03:06 by joppe         ########   odam.nl         */
+/*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
+/*   Updated: 2023/07/22 22:28:55 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 #include "timer.h"
 #include <stdio.h>
 
-
-void monitor(t_meta *meta)
+void philo_set_status(t_philo *p, t_status status)
 {
-	meta->clock = timer_init();
-
-
-
-
-	timer_free(meta->clock);
+	p->status = status;
+	// printf("status = %d\n", status);
+	// printf(LOG_TEXT[status], timer_delta(p->meta->clock, false), p->id);
 }

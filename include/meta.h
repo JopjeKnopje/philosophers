@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 21:32:38 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/22 22:19:28 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,27 @@ typedef struct s_fork {
 	uint32_t		id;
 }	t_fork;
 
-typedef void t_philo1;
+typedef struct s_args {
+	uint32_t	philo_count;
+	uint32_t 	eat_threshold;
+} t_args;
+
+typedef struct s_meta t_meta;
 
 typedef struct s_philo {
+	t_meta 		*meta;
+
 	t_fork		*forks[PHILO_FORK_COUNT];
-	t_timer 	*timer;
+	t_timer 	*eat_timer;
 	t_status	status;
 	uint32_t	id;
 }	t_philo;
-
-typedef struct s_args {
-	uint32_t	philo_count;
-	uint32_t 	time_to_die;
-
-} t_args;
 
 typedef struct s_meta {
 	t_philo		**philos;
 	t_fork		**forks;
 	pthread_t 	**threads;
+	t_timer 	*clock;
 	t_args 		args;
 }	t_meta;
 
@@ -82,6 +84,9 @@ long	get_time(void);
 int8_t	philos_init(t_meta *meta, uint32_t count);
 void	*philo_main(void *arg);
 void	philo_destroy(t_philo *p);
+
+// philo_action.c
+void	philo_set_status(t_philo *p, t_status status);
 
 // threads.c
 int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);

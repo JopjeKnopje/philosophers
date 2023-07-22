@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/07/22 21:06:45 by joppe         ########   odam.nl          #
+#    Updated: 2023/07/22 22:19:40 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ CFLAGS += -g -fsanitize=address
 SRC_DIR = src
 SRCS = main.c \
 	   philo.c \
+	   philo_action.c \
 	   forks.c \
 	   utils.c \
 	   monitor.c \
