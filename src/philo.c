@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:46:16 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:55:11 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_
 		return (NULL);
 	p->meta = meta;
 	p->id = id + 1;
-	p->status = STATUS_NONE;
+	p->status = STATUS_INACTIVE;
 	p->forks[PHILO_FORK_LEFT] = forks[id];
 	p->forks[PHILO_FORK_RIGHT] = forks[(id + 1) % count];
 	p->eat_timer = timer_init();
@@ -67,7 +67,10 @@ void *philo_main(void *arg)
 			break;
 		}
 	}
-	return (p);
+	uint32_t *id = ft_calloc(sizeof(uint32_t), 1);
+	*id = p->id;
+	// return (p);
+	return (id);
 }
 
 void	philo_destroy(t_philo *p)

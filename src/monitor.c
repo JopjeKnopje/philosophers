@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:50:57 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:54:27 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "timer.h"
 #include <stdint.h>
 #include <stdio.h>
-
-
 
 void monitor(t_meta *meta)
 {
@@ -33,10 +31,10 @@ void monitor(t_meta *meta)
 		{
 			p = meta->philos[i];
 			s = philo_get_status(p);
-			if (s != STATUS_DESTROYED && s == STATUS_DEAD)
+			if (s != STATUS_INACTIVE && s == STATUS_DEAD)
 			{
 				thread_destroy(meta->threads[i]);
-				p->status = STATUS_DESTROYED;
+				p->status = STATUS_INACTIVE;
 				t_count--;
 			}
 			i++;

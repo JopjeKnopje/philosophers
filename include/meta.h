@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:48:03 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:52:52 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@
 #include <stdbool.h>
 
 typedef enum e_status {
-	STATUS_NONE,
+	STATUS_INACTIVE,
 	STATUS_FORK,
 	STATUS_EAT,
 	STATUS_SLEEP,
 	STATUS_THINK,
 	STATUS_DEAD,
-	STATUS_DESTROYED,
 }	t_status; 
 
 static const char *LOG_TEXT[] = {

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/29 16:18:14 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 23:43:09 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:54:40 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	thread_destroy(pthread_t *t)
 {
 	uint32_t *id;
 	pthread_join(*t, (void **) &id);
-	// printf("joined id %d\n", *id);
-	// free(id);
+	printf("joined id %d\n", *id);
+	free(id);
 	free(t);
 }
