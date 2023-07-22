@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/29 16:18:14 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:54:40 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 01:27:41 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count)
 
 void	thread_destroy(pthread_t *t)
 {
-	uint32_t *id;
-	pthread_join(*t, (void **) &id);
-	printf("joined id %d\n", *id);
-	free(id);
+	t_philo *p;
+	pthread_join(*t, (void **) &p);
+	// printf("joined id %d\n", p->id);
 	free(t);
 }

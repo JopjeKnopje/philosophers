@@ -40,8 +40,8 @@
   ms after the actual death of the philosopher.
 
 ## TODO
-- [ ] Maybe sync the start of each thread after creation.
-- [ ] Maybe print the `has died` message from the thread itself.
+- [x] Sync the start of each thread after creation.
+- [x] Print the `has died` message from the thread itself.
 - [ ] In `thread.c:43` free all the thread before the current one, if allocation fails.
 
 

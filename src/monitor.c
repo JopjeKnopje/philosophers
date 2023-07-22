@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:54:27 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 01:30:19 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void monitor(t_meta *meta)
 		while (i < meta->args.philo_count)
 		{
 			p = meta->philos[i];
-			s = philo_get_status(p);
-			if (s != STATUS_INACTIVE && s == STATUS_DEAD)
+			if (philo_get_status(p) == STATUS_DEAD)
 			{
 				thread_destroy(meta->threads[i]);
 				p->status = STATUS_INACTIVE;

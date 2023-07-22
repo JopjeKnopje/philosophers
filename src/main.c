@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:51:47 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 01:21:25 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 #include "meta.h"
 #include "timer.h"
 
-#define FORK_COUNT 100
+#define FORK_COUNT 5
 
 int main(int argc, char *argv[]) 
 {
 	t_meta meta;
 
 	meta.args.philo_count = FORK_COUNT;
-	meta.args.eat_threshold = 100;
+	meta.args.eat_threshold = 200;
 	meta.clock = timer_init();
 	forks_init(&meta, meta.args.philo_count);
 	philos_init(&meta, meta.args.philo_count);
