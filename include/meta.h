@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:05:16 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:48:03 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ typedef enum e_status {
 	STATUS_SLEEP,
 	STATUS_THINK,
 	STATUS_DEAD,
+	STATUS_DESTROYED,
 }	t_status; 
 
 static const char *LOG_TEXT[] = {
-	"%ld %d NONE\n",
+	"%ld %d DESTROYED \n",
 	"%ld %d has taken a fork\n",
 	"%ld %d is eating\n",
 	"%ld %d is sleeping\n",
@@ -69,7 +70,7 @@ typedef struct s_meta {
 	t_fork		**forks;
 	pthread_t 	**threads;
 	t_timer 	*clock;
-	pthread_mutex_t print_mutex;
+	pthread_mutex_t status_mutex;
 	pthread_mutex_t start_mutex;
 	t_args 		args;
 }	t_meta;
@@ -88,7 +89,8 @@ void	*philo_main(void *arg);
 void	philo_destroy(t_philo *p);
 
 // philo_action.c
-void	philo_set_status(t_philo *p, t_status status);
+void		philo_set_status(t_philo *p, t_status status);
+t_status	philo_get_status(t_philo *p);
 
 // threads.c
 int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);

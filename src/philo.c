@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:09:13 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:46:16 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void *philo_main(void *arg)
 	pthread_mutex_lock(&p->meta->start_mutex);
 	pthread_mutex_unlock(&p->meta->start_mutex);
 
-
 	while (p->status != STATUS_DEAD) 
 	{
 		if (timer_delta(p->eat_timer, false) >= p->meta->args.eat_threshold)
@@ -68,9 +67,6 @@ void *philo_main(void *arg)
 			break;
 		}
 	}
-	// uint32_t *id = ft_calloc(sizeof(uint32_t), 1);
-	// *id = p->id;
-	// return (id);
 	return (p);
 }
 

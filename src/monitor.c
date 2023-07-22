@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:07:58 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 00:50:57 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void monitor(t_meta *meta)
 	uint32_t i;
 	uint32_t t_count;
 	
+	t_status s;
 
 	t_count = meta->args.philo_count;
 	while (t_count)
@@ -31,12 +32,11 @@ void monitor(t_meta *meta)
 		while (i < meta->args.philo_count)
 		{
 			p = meta->philos[i];
-			pthread_mutex_lock(&p->meta->print_mutex);
-			t_status s = p->status;
-			pthread_mutex_unlock(&p->meta->print_mutex);
-			if (s)
+			s = philo_get_status(p);
+			if (s != STATUS_DESTROYED && s == STATUS_DEAD)
 			{
 				thread_destroy(meta->threads[i]);
+				p->status = STATUS_DESTROYED;
 				t_count--;
 			}
 			i++;
