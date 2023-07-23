@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 02:32:30 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 02:37:13 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	thread_destroy(pthread_t *t);
 // monitor.c
 void	monitor(t_meta *meta);
 t_group	monitor_get_active_group(t_meta *meta);
-void	monitor_set_active_group(t_meta *meta, t_group g);
 
 // free.c
 void free_forks(t_meta *meta);
