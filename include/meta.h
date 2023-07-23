@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 01:56:40 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 02:32:30 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ typedef enum e_status {
 }	t_status; 
 
 typedef enum e_group {
-	EATING_LAST,
-	EATING_ODD,
-	EATING_EVEN,
+	EATING_LAST = 0,
+	EATING_ODD = 1,
+	EATING_EVEN = 2,
 } t_group;
 
 static const char *GROUP_TEXT[] = {
@@ -62,7 +62,8 @@ typedef struct s_fork {
 
 typedef struct s_args {
 	uint32_t	philo_count;
-	uint32_t 	eat_threshold;
+	uint32_t 	time_to_die;
+	uint32_t	time_to_eat;
 } t_args;
 
 typedef struct s_meta t_meta;
@@ -84,6 +85,7 @@ typedef struct s_meta {
 	t_timer 	*clock;
 	pthread_mutex_t status_mutex;
 	pthread_mutex_t start_mutex;
+	pthread_mutex_t group_mutex;
 	t_args 		args;
 	t_group 	active_group;
 }	t_meta;
@@ -104,6 +106,8 @@ void	philo_destroy(t_philo *p);
 // philo_action.c
 void		philo_set_status(t_philo *p, t_status status);
 t_status	philo_get_status(t_philo *p);
+void philo_putdown_fork(t_philo *p);
+void philo_take_fork(t_philo *p);
 
 // threads.c
 int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);
@@ -111,7 +115,9 @@ void	thread_destroy(pthread_t *t);
 
 
 // monitor.c
-void monitor(t_meta *meta);
+void	monitor(t_meta *meta);
+t_group	monitor_get_active_group(t_meta *meta);
+void	monitor_set_active_group(t_meta *meta, t_group g);
 
 // free.c
 void free_forks(t_meta *meta);

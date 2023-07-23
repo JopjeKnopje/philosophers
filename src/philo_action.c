@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 00:41:57 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 02:30:55 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,19 @@ t_status philo_get_status(t_philo *p)
 	s = p->status;
 	pthread_mutex_unlock(&p->meta->status_mutex);
 	return (s);
+}
+
+void philo_take_fork(t_philo *p)
+{
+	pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	pthread_mutex_lock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+	philo_set_status(p, STATUS_FORK);
+}
+
+void philo_putdown_fork(t_philo *p)
+{
+	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	philo_set_status(p, STATUS_THINK);
+	timer_start(p->eat_timer);
 }

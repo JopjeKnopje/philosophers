@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 01:55:50 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 02:32:30 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_
 	p->forks[PHILO_FORK_RIGHT] = forks[(id + 1) % count];
 	p->eat_timer = timer_init();
 	p->group = (id % 2) + (id != count - 1) * (id != count - 1);
+
 	return (p);
 }
 
@@ -63,10 +64,23 @@ void *philo_main(void *arg)
 
 	while (p->status != STATUS_DEAD) 
 	{
-		if (timer_delta(p->eat_timer, false) >= p->meta->args.eat_threshold)
+		t_group g = monitor_get_active_group(p->meta);
+		t_status s = philo_get_status(p);
+
+		if (timer_delta(p->eat_timer, false) >= p->meta->args.time_to_die)
 		{
 			philo_set_status(p, STATUS_DEAD);
 			break;
+		}
+		else if (g == p->group && s != STATUS_FORK)
+		{
+			philo_take_fork(p);
+			usleep(p->meta->args.time_to_eat);
+		}
+
+		else if (g != p->group && s != STATUS_THINK)
+		{
+			philo_putdown_fork(p);
 		}
 	}
 	return (p);

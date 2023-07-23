@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 01:55:58 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 02:34:06 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int philosophers(int argc, char *argv[])
 	t_meta meta;
 
 	meta.args.philo_count = FORK_COUNT;
-	meta.args.eat_threshold = 200;
+	meta.args.time_to_die = 1000;
+	meta.args.time_to_eat = 200;
 	meta.clock = timer_init();
 	forks_init(&meta, meta.args.philo_count);
 	philos_init(&meta, meta.args.philo_count);
 
 	pthread_mutex_init(&meta.status_mutex, NULL);
 	pthread_mutex_init(&meta.start_mutex, NULL);
+	pthread_mutex_init(&meta.group_mutex, NULL);
 
 
 	pthread_mutex_lock(&meta.start_mutex);
@@ -46,13 +48,13 @@ int philosophers(int argc, char *argv[])
 	monitor(&meta);
 
 
-
 	free_forks(&meta);
 
 	free_philos(&meta);
 	timer_free(meta.clock);
 	pthread_mutex_destroy(&meta.status_mutex);
 	pthread_mutex_destroy(&meta.start_mutex);
+	pthread_mutex_destroy(&meta.group_mutex);
 
 
 	return (0);
