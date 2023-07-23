@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 02:30:55 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 19:36:06 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void philo_set_status(t_philo *p, t_status status)
 {
 	long time;
+
 	pthread_mutex_lock(&p->meta->status_mutex);
 	time = timer_delta(p->meta->clock, false);
 	p->status = status;
@@ -34,17 +35,27 @@ t_status philo_get_status(t_philo *p)
 	return (s);
 }
 
-void philo_take_fork(t_philo *p)
+void philo_eat(t_philo *p)
 {
 	pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	philo_set_status(p, STATUS_FORK);
 	pthread_mutex_lock(&p->forks[PHILO_FORK_RIGHT]->mutex);
 	philo_set_status(p, STATUS_FORK);
-}
 
-void philo_putdown_fork(t_philo *p)
-{
-	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
-	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
-	philo_set_status(p, STATUS_THINK);
+
+	philo_set_status(p, STATUS_EAT);
 	timer_start(p->eat_timer);
+
+	sleep_ms(p->meta->args.time_to_eat);
+
+	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+
+	scheduler_done(p->meta, &p->meta->scheduler);
+
+
+	if (timer_delta(p->eat_timer, true) >= p->meta->args.time_to_die)
+	{
+		philo_set_status(p, STATUS_DEAD);
+	}
 }

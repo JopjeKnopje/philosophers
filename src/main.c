@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 16:21:41 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 20:37:46 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int philosophers(int argc, char *argv[])
 
 	pthread_mutex_init(&meta.status_mutex, NULL);
 	pthread_mutex_init(&meta.start_mutex, NULL);
-	pthread_mutex_init(&meta.group_mutex, NULL);
+	pthread_mutex_init(&meta.scheduler.group_mutex, NULL);
+	pthread_mutex_init(&meta.scheduler.mutex, NULL);
 
 
 	pthread_mutex_lock(&meta.start_mutex);
@@ -54,7 +55,8 @@ int philosophers(int argc, char *argv[])
 	timer_free(meta.clock);
 	pthread_mutex_destroy(&meta.status_mutex);
 	pthread_mutex_destroy(&meta.start_mutex);
-	pthread_mutex_destroy(&meta.group_mutex);
+	pthread_mutex_destroy(&meta.scheduler.group_mutex);
+	pthread_mutex_destroy(&meta.scheduler.mutex);
 
 
 	return (0);

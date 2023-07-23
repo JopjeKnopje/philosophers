@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 16:18:30 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 20:23:37 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,21 @@ void *philo_main(void *arg)
 	timer_start(p->eat_timer);
 
 
+	t_group g;
+
+	// take 2 forks
+	// eat with eat_time
+	// sleep for sleep_time
+	// think until forks are available
 	while (p->status != STATUS_DEAD) 
 	{
-		t_group g = monitor_get_active_group(p->meta);
-		t_status s = philo_get_status(p);
-
-		if (timer_delta(p->eat_timer, false) >= p->meta->args.time_to_die)
+		g = scheduler_get_active_group(&p->meta->scheduler);
+		if (p->group == g)
 		{
-			philo_set_status(p, STATUS_DEAD);
-			break;
+			philo_eat(p);
 		}
-		else if (g == p->group && s != STATUS_FORK)
-		{
-			philo_take_fork(p);
-			sleep_ms(p->meta->args.time_to_eat);
-		}
-
-		else if (g != p->group && s != STATUS_THINK)
-		{
-			philo_putdown_fork(p);
-		}
+		// philo_sleep(p);
+		// philo_think(p);
 	}
 	return (p);
 }
