@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/06/19 09:17:13 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 20:42:24 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 16:08:18 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define TIMER_H
 
 # include <stdbool.h>
-
-# define MICRO_TO_SECOND 1000000
 
 typedef struct timeval t_timeval;
 

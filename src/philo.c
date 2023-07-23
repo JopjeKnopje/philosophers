@@ -6,11 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 02:34:58 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 16:18:30 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "timer.h"
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -62,6 +63,7 @@ void *philo_main(void *arg)
 	pthread_mutex_unlock(&p->meta->start_mutex);
 	timer_start(p->eat_timer);
 
+
 	while (p->status != STATUS_DEAD) 
 	{
 		t_group g = monitor_get_active_group(p->meta);
@@ -75,7 +77,7 @@ void *philo_main(void *arg)
 		else if (g == p->group && s != STATUS_FORK)
 		{
 			philo_take_fork(p);
-			usleep(p->meta->args.time_to_eat);
+			sleep_ms(p->meta->args.time_to_eat);
 		}
 
 		else if (g != p->group && s != STATUS_THINK)

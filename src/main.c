@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 02:34:06 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/23 16:21:41 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int philosophers(int argc, char *argv[])
 	t_meta meta;
 
 	meta.args.philo_count = FORK_COUNT;
-	meta.args.time_to_die = 1000;
-	meta.args.time_to_eat = 200;
+	meta.args.time_to_die = 999;
+	meta.args.time_to_eat = 1000;
 	meta.clock = timer_init();
 	forks_init(&meta, meta.args.philo_count);
 	philos_init(&meta, meta.args.philo_count);
