@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/23 19:01:40 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 20:21:37 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/24 10:46:43 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void scheduler_done(t_meta *m, t_scheduler *s)
 			s->remaining = 1;
 		else 
 			s->remaining = (m->args.philo_count / 2);
-		printf("remaining set to %d\n", s->remaining);
 	}
 	pthread_mutex_unlock(&s->mutex);
 	if (cycle)

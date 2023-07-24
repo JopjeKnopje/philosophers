@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/07/23 20:10:32 by joppe         ########   odam.nl          #
+#    Updated: 2023/07/24 10:53:18 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RUN_CMD := ./$(NAME)
 
 # CFLAGS += -Wall -Wextra -Werror
 # CFLAGS += -g -fsanitize=thread
-CFLAGS += -g -fsanitize=address
+# CFLAGS += -g -fsanitize=address
 # CFLAGS = -g 
 
 SRC_DIR = src

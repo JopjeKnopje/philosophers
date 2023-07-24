@@ -6,12 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 23:34:21 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 21:36:00 by joppe         ########   odam.nl         */
+/*   Updated: 2023/07/24 10:33:08 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <bits/pthreadtypes.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
