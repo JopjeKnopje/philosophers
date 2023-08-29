@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/07/24 10:53:18 by jboeve        ########   odam.nl          #
+#    Updated: 2023/08/29 18:56:43 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,13 @@ SRCS = main.c \
 	   utils.c \
 	   monitor.c \
 	   free.c \
-	   timer.c \
 	   thread.c \
-	   scheduler.c \
 	   meuk.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
 
 HEADER_DIR = include
-HEADERS = meta.h \
-		  timer.h
+HEADERS = meta.h
 
 HEADERS := $(addprefix $(HEADER_DIR)/, $(HEADERS))
 

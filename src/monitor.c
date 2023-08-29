@@ -6,12 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 19:12:46 by joppe         ########   odam.nl         */
+/*   Updated: 2023/08/29 19:01:01 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include "timer.h"
 #include <stdint.h>
 #include <stdio.h>
 
@@ -33,7 +32,6 @@ void monitor(t_meta *meta)
 			if (philo_get_status(p) == STATUS_DEAD)
 			{
 				thread_destroy(meta->threads[i]);
-				p->status = STATUS_INACTIVE;
 				t_count--;
 			}
 			i++;

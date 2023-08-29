@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 16:19:29 by joppe         ########   odam.nl         */
+/*   Updated: 2023/08/29 18:59:13 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-long get_time(void)
+long get_time_ms(void)
 {
 	struct timeval tv;
 
@@ -39,5 +39,9 @@ long get_time(void)
 
 void sleep_ms(long ms)
 {
-	usleep(ms * 1000);
+	long old = get_time_ms();
+	while (get_time_ms() - old < ms)
+	{
+		usleep(ms / 2 * 1000);
+	}
 }

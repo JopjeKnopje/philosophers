@@ -40,12 +40,9 @@
   ms after the actual death of the philosopher.
 
 ## TODO
-- [x] Sync the start of each thread after creation.
-- [x] Print the `has died` message from the thread itself.
-- [ ] In `thread.c:43` free all the thread before the current one, if allocation fails.
-- [ ] Maybe get rid of `group_mutex`.
-- [ ] Instead of using a `scheduler` swap the `FORK_LEFT` and `FORK_RIGHT` for the odd philos.
-- [ ] On linux the program hangs when we compile with a `sanitizer`.
+- [ ] REFACTOR NO SCHEDULER!??!?!??!
+- [ ] Write a asymptotic `sleep_ms()`
+
 
 
 
