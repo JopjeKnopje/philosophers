@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/24 10:52:37 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/08/29 18:50:11 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,7 @@ int philosophers(int argc, char *argv[])
 	forks_init(&meta, meta.args.philo_count);
 	philos_init(&meta, meta.args.philo_count);
 
-	pthread_mutex_init(&meta.status_mutex, NULL);
-	pthread_mutex_init(&meta.start_mutex, NULL);
-	pthread_mutex_init(&meta.scheduler.group_mutex, NULL);
-	pthread_mutex_init(&meta.scheduler.mutex, NULL);
-
-
-	pthread_mutex_lock(&meta.start_mutex);
 	threads_init(&meta, philo_main, meta.args.philo_count);
-	timer_start(meta.clock);
-	pthread_mutex_unlock(&meta.start_mutex);
 
 	monitor(&meta);
 

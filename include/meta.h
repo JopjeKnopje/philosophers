@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 19:34:43 by joppe         ########   odam.nl         */
+/*   Updated: 2023/08/29 18:51:15 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ typedef enum e_status {
 	STATUS_THINK,
 	STATUS_DEAD,
 }	t_status; 
-
-typedef enum e_group {
-	GROUP_LAST = 0,
-	GROUP_ODD = 1,
-	GROUP_EVEN = 2,
-} t_group;
-
-static const char *GROUP_TEXT[] = {
-	"LAST",
-	"ODD",
-	"EVEN",
-};
 
 static const char *LOG_TEXT[] = {
 	"%ld %d DESTROYED \n",
@@ -71,29 +59,17 @@ typedef struct s_meta t_meta;
 typedef struct s_philo {
 	t_meta 		*meta;
 
-	t_group 	group;
 	t_fork		*forks[PHILO_FORK_COUNT];
 	t_timer 	*eat_timer;
-	t_status	status;
 	uint32_t	id;
 }	t_philo;
-
-typedef struct s_scheduler {
-	pthread_mutex_t mutex;
-	pthread_mutex_t group_mutex;
-	t_group 		group_active;
-	uint32_t 		remaining;
-} t_scheduler;
 
 typedef struct s_meta {
 	t_philo			**philos;
 	t_fork			**forks;
 	pthread_t 		**threads;
 	t_timer 		*clock;
-	pthread_mutex_t	status_mutex;
-	pthread_mutex_t	start_mutex;
 	t_args 			args;
-	t_scheduler 	scheduler;
 }	t_meta;
 
 // forks.c
@@ -119,17 +95,11 @@ void		philo_eat(t_philo *p);
 int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);
 void	thread_destroy(pthread_t *t);
 
-
 // monitor.c
 void	monitor(t_meta *meta);
 
 // free.c
 void	free_forks(t_meta *meta);
-
-// scheduler.c
-void		scheduler_done(t_meta *m, t_scheduler *s);
-t_group		scheduler_get_active_group(t_scheduler *s);
-uint32_t	scheduler_get_remaining(t_scheduler *s);
 
 // meuk.c
 void	print_philos(t_philo *ps[], uint32_t count);
