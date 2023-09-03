@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/08/29 18:55:55 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/02 23:44:59 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int philosophers(int argc, char *argv[])
 
 	forks_init(&meta, meta.args.philo_count);
 	philos_init(&meta, meta.args.philo_count);
-
 	threads_init(&meta, philo_main, meta.args.philo_count);
 
 	monitor(&meta);
