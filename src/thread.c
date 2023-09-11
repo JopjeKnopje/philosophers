@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/29 16:18:14 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/23 02:09:32 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/11 16:52:52 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include "meta.h"
 
-pthread_t *thread_init(t_meta *meta, void *(*routine)(void *), void *arg)
+pthread_t *thread_init(void *(*routine)(void *), void *arg)
 {
 	pthread_t *t;
 
@@ -40,7 +40,7 @@ int8_t	threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count)
 		return (1);
 	while (i < count)
 	{
-		meta->threads[i] = thread_init(meta, routine, meta->philos[i]);
+		meta->threads[i] = thread_init(routine, meta->philos[i]);
 		if (!meta->threads[i])
 			return (1);
 		i++;

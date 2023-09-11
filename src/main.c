@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/02 23:44:59 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/11 16:54:23 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 #define FORK_COUNT 5
 
-
 int philosophers(int argc, char *argv[]) 
 {
 	t_meta meta;
@@ -35,8 +34,7 @@ int philosophers(int argc, char *argv[])
 	forks_init(&meta, meta.args.philo_count);
 	philos_init(&meta, meta.args.philo_count);
 	threads_init(&meta, philo_main, meta.args.philo_count);
-
-	monitor(&meta);
+	monitor_init(&meta);
 
 
 	free_forks(&meta);
@@ -46,5 +44,9 @@ int philosophers(int argc, char *argv[])
 }
 int main(int argc, char *argv[])
 {
+	// check input params
+	// set argv fields
+	// start sim (which is blocking)
+	// stop sim
 	return (philosophers(argc, argv));
 }
