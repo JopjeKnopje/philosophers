@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/11 16:53:38 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/12 15:55:31 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ bool monitor_init(t_meta *meta)
 void *monitor(void *param)
 {
 	t_meta meta = meta;
+
+	while (true) {
+	}
 	return (NULL);
 }
