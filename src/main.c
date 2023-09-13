@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/13 15:58:41 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/13 16:40:47 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int parse(t_args *args, int argc, char *argv[])
 	args->philo_count = FORK_COUNT;
 	args->time_to_die = 1000;
 	args->time_to_eat = 999;
+	args->time_to_sleep = 300;
 	return (1);
 }
 

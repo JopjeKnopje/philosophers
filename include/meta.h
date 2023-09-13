@@ -6,13 +6,14 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/13 15:44:29 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/13 16:56:28 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 #define PHILO_H
 
+#include <bits/pthreadtypes.h>
 #include <stdint.h>
 #include <pthread.h>
 #include <stdlib.h>
@@ -25,7 +26,6 @@ typedef struct s_meta t_meta;
 
 
 typedef enum e_status {
-	STATUS_INACTIVE,
 	STATUS_FORK,
 	STATUS_EAT,
 	STATUS_SLEEP,
@@ -33,14 +33,6 @@ typedef enum e_status {
 	STATUS_DEAD,
 }	t_status; 
 
-static const char *LOG_TEXT[] = {
-	"%ld %d INACTIVE \n",
-	"%ld %d has taken a fork\n",
-	"%ld %d is eating\n",
-	"%ld %d is sleeping\n",
-	"%ld %d is thinking\n",
-	"%ld %d died\n",
-};
 
 typedef enum e_philo_fork {
 	PHILO_FORK_LEFT,
@@ -57,6 +49,7 @@ typedef struct s_args {
 	uint32_t	philo_count;
 	uint32_t 	time_to_die;
 	uint32_t	time_to_eat;
+	uint32_t	time_to_sleep;
 } t_args;
 
 
@@ -67,8 +60,14 @@ typedef struct s_philo {
 	uint32_t	id;
 }	t_philo;
 
+typedef struct s_logger {
+	long start_time;
+	pthread_mutex_t mutex;
+} t_logger;
+
 typedef struct s_meta {
 	t_philo			**philos;
+	t_logger 		logger;
 	t_fork			**forks;
 	t_args 			args;
 }	t_meta;
@@ -83,7 +82,7 @@ long	get_time_ms(void);
 void	sleep_ms(long ms);
 
 // philo.c
-int8_t	philos_init(t_meta *meta, uint32_t count);
+int	philos_init(t_meta *meta, uint32_t count);
 void	*philo_main(void *arg);
 void	philo_join(t_philo *p);
 

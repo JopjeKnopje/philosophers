@@ -6,10 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/13 16:00:10 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/13 16:41:01 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <pthread.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -36,7 +37,7 @@ static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_
 	return (p);
 }
 
-int8_t	philos_init(t_meta *meta, uint32_t count)
+int	philos_init(t_meta *meta, uint32_t count)
 {
 	uint32_t	i;
 
@@ -67,12 +68,23 @@ void *philo_main(void *arg)
 	// sleep for sleep_time
 	// think until forks are available
 
-	for (int i = 0; i < 10; i++)
+	while (1)
 	{
-		printf("pid: %d | i: %d\n", p->id, i);
-		sleep_ms(50);
-	}
+		// eat
+		pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
 
+		pthread_mutex_lock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+
+		sleep_ms(p->meta->args.time_to_eat);
+
+		pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
+		pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+
+
+		sleep_ms(p->meta->args.time_to_sleep);
+
+
+	}
 
 	return (p);
 }

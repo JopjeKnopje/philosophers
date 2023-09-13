@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 23:34:21 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/13 15:55:20 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/13 16:24:55 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void print_philo(t_philo *p)
 
 void print_philos(t_philo *ps[], uint32_t count)
 {
-	int i = 0;
+	int	i = 0;
 	t_philo *p = ps[i];
 
 	while (i < count)
