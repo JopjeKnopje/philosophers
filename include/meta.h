@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/11 16:52:40 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/13 15:44:29 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_args {
 
 typedef struct s_philo {
 	t_meta 		*meta;
+	pthread_t 	thread;
 	t_fork		*forks[PHILO_FORK_COUNT];
 	uint32_t	id;
 }	t_philo;
@@ -69,8 +70,6 @@ typedef struct s_philo {
 typedef struct s_meta {
 	t_philo			**philos;
 	t_fork			**forks;
-	pthread_t 		**threads;
-	pthread_t 		*monitor_thread;
 	t_args 			args;
 }	t_meta;
 
@@ -86,11 +85,9 @@ void	sleep_ms(long ms);
 // philo.c
 int8_t	philos_init(t_meta *meta, uint32_t count);
 void	*philo_main(void *arg);
-void	philo_destroy(t_philo *p);
+void	philo_join(t_philo *p);
 
 // philo_action.c
-void		philo_set_status(t_philo *p, t_status status);
-t_status	philo_get_status(t_philo *p);
 void		philo_eat(t_philo *p);
 
 // threads.c
@@ -99,8 +96,7 @@ int8_t		threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);
 void		thread_destroy(pthread_t *t);
 
 // monitor.c
-bool	monitor_init(t_meta *meta);
-void	*monitor(void *meta);
+void		*monitor(void *meta);
 
 // free.c
 void		free_forks(t_meta *meta);

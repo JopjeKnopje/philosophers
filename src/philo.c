@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/02 23:45:58 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/13 16:00:10 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_t id)
 {
-	t_philo *p;
+	t_philo	*p;
 
 	p = ft_calloc(sizeof(t_philo), 1);
 	if (!p)
@@ -28,6 +28,11 @@ static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_
 	p->id = id + 1;
 	p->forks[PHILO_FORK_LEFT] = forks[id];
 	p->forks[PHILO_FORK_RIGHT] = forks[(id + 1) % count];
+	if (pthread_create(&p->thread, NULL, philo_main, p))
+	{
+		free(p);
+		return (NULL);
+	}
 	return (p);
 }
 
@@ -38,12 +43,15 @@ int8_t	philos_init(t_meta *meta, uint32_t count)
 	i = 0;
 	meta->philos = ft_calloc(sizeof(t_philo *), count);
 	if (!meta->philos)
-		return (1);
+		return (0);
 	while (i < count)
 	{
 		meta->philos[i] = philo_init(meta->forks, meta, count, i);
 		if (!meta->philos[i])
+		{
+			// TODO When `i != 0` fails free the others.
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -51,7 +59,7 @@ int8_t	philos_init(t_meta *meta, uint32_t count)
 
 void *philo_main(void *arg)
 {
-	t_philo *p;
+	t_philo *p = arg;
 
 
 	// take 2 forks
@@ -59,12 +67,19 @@ void *philo_main(void *arg)
 	// sleep for sleep_time
 	// think until forks are available
 
+	for (int i = 0; i < 10; i++)
+	{
+		printf("pid: %d | i: %d\n", p->id, i);
+		sleep_ms(50);
+	}
 
 
 	return (p);
 }
 
-void	philo_destroy(t_philo *p)
+void	philo_join(t_philo *p)
 {
+	pthread_join(p->thread, (void *) p);
+	printf("joined %d\n", p->id);
 	free(p);
 }
