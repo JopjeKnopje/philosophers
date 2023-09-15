@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/08/29 18:59:13 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/15 16:47:32 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void sleep_ms(long ms)
 	long old = get_time_ms();
 	while (get_time_ms() - old < ms)
 	{
-		usleep(ms / 2 * 1000);
+		usleep(ms / (2 * 1000));
 	}
 }

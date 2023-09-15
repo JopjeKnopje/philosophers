@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/13 16:41:01 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/15 16:45:07 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,11 @@ void *philo_main(void *arg)
 	// eat with eat_time
 	// sleep for sleep_time
 	// think until forks are available
-
 	while (1)
 	{
-		// eat
-		pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
-
-		pthread_mutex_lock(&p->forks[PHILO_FORK_RIGHT]->mutex);
-
-		sleep_ms(p->meta->args.time_to_eat);
-
-		pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
-		pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
-
-
-		sleep_ms(p->meta->args.time_to_sleep);
-
-
+		philo_eat(p);
+		philo_sleep(p);
+		philo_think(p);
 	}
 
 	return (p);

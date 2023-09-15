@@ -42,6 +42,7 @@
 ## TODO
 - [ ] Parse argsuments
 - [ ] Write a asymptotic `sleep_ms()`
+- [ ] Start working on measuring time to die.
 
 
 

@@ -6,16 +6,15 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/13 16:56:28 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/15 16:46:35 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 #define PHILO_H
 
-#include <bits/pthreadtypes.h>
-#include <stdint.h>
 #include <pthread.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
@@ -23,15 +22,13 @@
 
 typedef struct s_meta t_meta;
 
-
-
-typedef enum e_status {
-	STATUS_FORK,
-	STATUS_EAT,
-	STATUS_SLEEP,
-	STATUS_THINK,
-	STATUS_DEAD,
-}	t_status; 
+typedef enum e_message {
+	MESSAGE_FORK,
+	MESSAGE_EAT,
+	MESSAGE_SLEEP,
+	MESSAGE_THINK,
+	MESSAGE_DEAD,
+}	t_message; 
 
 
 typedef enum e_philo_fork {
@@ -52,7 +49,6 @@ typedef struct s_args {
 	uint32_t	time_to_sleep;
 } t_args;
 
-
 typedef struct s_philo {
 	t_meta 		*meta;
 	pthread_t 	thread;
@@ -60,15 +56,13 @@ typedef struct s_philo {
 	uint32_t	id;
 }	t_philo;
 
-typedef struct s_logger {
-	long start_time;
-	pthread_mutex_t mutex;
-} t_logger;
 
 typedef struct s_meta {
 	t_philo			**philos;
-	t_logger 		logger;
 	t_fork			**forks;
+	unsigned long 	start_time;
+	pthread_mutex_t mutex_log;
+	pthread_mutex_t mutex_start;
 	t_args 			args;
 }	t_meta;
 
@@ -82,12 +76,14 @@ long	get_time_ms(void);
 void	sleep_ms(long ms);
 
 // philo.c
-int	philos_init(t_meta *meta, uint32_t count);
+int		philos_init(t_meta *meta, uint32_t count);
 void	*philo_main(void *arg);
 void	philo_join(t_philo *p);
 
 // philo_action.c
-void		philo_eat(t_philo *p);
+void	philo_eat(t_philo *p);
+void	philo_sleep(t_philo *p);
+void	philo_think(t_philo *p);
 
 // threads.c
 pthread_t	*thread_init(void *(*routine)(void *), void *arg);
@@ -99,6 +95,10 @@ void		*monitor(void *meta);
 
 // free.c
 void		free_forks(t_meta *meta);
+
+// logger.c
+int logger_init(t_meta *meta);
+void logger_log(t_philo *p, t_message status);
 
 // meuk.c
 void		print_philos(t_philo *ps[], uint32_t count);

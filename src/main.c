@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/13 16:40:47 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/15 16:47:04 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,34 @@
 #include <unistd.h>
 #include "meta.h"
 
-#define FORK_COUNT 5
-
 int sim_start(t_meta *meta)
 {
-	forks_init(meta, meta->args.philo_count);
+	if (pthread_mutex_init(&meta->mutex_start, NULL))
+	{
+		printf("mutex_init failed\n");
+		return (0);
+	}
+	pthread_mutex_lock(&meta->mutex_start);
+
+	if (forks_init(meta, meta->args.philo_count))
+	{
+		printf("forks_init failed\n");
+		return (0);
+	}
 	if (philos_init(meta, meta->args.philo_count))
 	{
 		printf("philos_init failed\n");
 		return (0);
 	}
+
+	// start the threads.
+	pthread_mutex_unlock(&meta->mutex_start);
+	if (!logger_init(meta))
+	{
+		printf("logger_init failed\n");
+		return (0);
+	}
+	monitor(meta);
 	return (1);
 }
 
@@ -42,7 +60,7 @@ int sim_stop(t_meta *meta)
 
 int parse(t_args *args, int argc, char *argv[])
 {
-	args->philo_count = FORK_COUNT;
+	args->philo_count = 5;
 	args->time_to_die = 1000;
 	args->time_to_eat = 999;
 	args->time_to_sleep = 300;

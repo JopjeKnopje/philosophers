@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:17:25 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/22 20:59:11 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/15 15:43:29 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_fork	*fork_init(uint32_t id)
 
 int8_t	forks_init(t_meta *meta, size_t count)
 {
-	uint32_t
+	uint32_t	i;
 
 	i = 0;
 	meta->forks = ft_calloc(sizeof(t_fork *), count);

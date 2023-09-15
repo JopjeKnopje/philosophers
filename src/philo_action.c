@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/08/29 19:00:45 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/15 16:48:19 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,31 @@
 #include <assert.h>
 #include <pthread.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void philo_eat(t_philo *p)
 {
-	assert("NOT IMPLEMENTED YET!" && 0);
+	// eat
+	logger_log(p, MESSAGE_FORK);
+	pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	
+	logger_log(p, MESSAGE_FORK);
+	pthread_mutex_lock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+
+	logger_log(p, MESSAGE_EAT);
+	sleep_ms(p->meta->args.time_to_eat);
+
+	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+}
+
+void philo_sleep(t_philo *p)
+{
+	logger_log(p, MESSAGE_SLEEP);
+	sleep_ms(p->meta->args.time_to_sleep);
+}
+
+void philo_think(t_philo *p)
+{
+	logger_log(p, MESSAGE_THINK);
 }
