@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 16:45:07 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/15 18:57:13 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void *philo_main(void *arg)
 {
 	t_philo *p = arg;
 
+	pthread_mutex_lock(&p->meta->mutex_start);
+	pthread_mutex_unlock(&p->meta->mutex_start);
 
 	// take 2 forks
 	// eat with eat_time

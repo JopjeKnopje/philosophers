@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 16:46:35 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/15 18:59:05 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ int8_t	forks_init(t_meta *meta, size_t count);
 void	fork_destroy(t_fork *f);
 
 // utils.c
-void	*ft_calloc(size_t nmemb, size_t size);
-long	get_time_ms(void);
-void	sleep_ms(long ms);
+void			*ft_calloc(size_t nmemb, size_t size);
+unsigned long	get_time_ms(void);
+void			sleep_ms(unsigned long ms);
 
 // philo.c
 int		philos_init(t_meta *meta, uint32_t count);
@@ -97,8 +97,7 @@ void		*monitor(void *meta);
 void		free_forks(t_meta *meta);
 
 // logger.c
-int logger_init(t_meta *meta);
-void logger_log(t_philo *p, t_message status);
+void		logger_log(t_philo *p, t_message status);
 
 // meuk.c
 void		print_philos(t_philo *ps[], uint32_t count);
