@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 18:55:13 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/15 19:20:04 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int sim_start(t_meta *meta)
 
 int sim_stop(t_meta *meta)
 {
-	free_forks(meta);
 	free_philos(meta);
+	free_forks(meta);
 	return (1);
 }
 

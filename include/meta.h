@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 18:59:05 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/15 19:13:08 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ typedef struct s_args {
 } t_args;
 
 typedef struct s_philo {
-	t_meta 		*meta;
-	pthread_t 	thread;
-	t_fork		*forks[PHILO_FORK_COUNT];
-	uint32_t	id;
+	uint32_t		id;
+	t_meta 			*meta;
+	pthread_t 		thread;
+	t_fork			*forks[PHILO_FORK_COUNT];
+	unsigned long 	last_eat_time;
+	unsigned long 	eat_count;
 }	t_philo;
 
 
@@ -91,7 +93,7 @@ int8_t		threads_init(t_meta *meta, void *(*routine)(void *), uint32_t count);
 void		thread_destroy(pthread_t *t);
 
 // monitor.c
-void		*monitor(void *meta);
+void	*monitor(t_meta *meta);
 
 // free.c
 void		free_forks(t_meta *meta);
