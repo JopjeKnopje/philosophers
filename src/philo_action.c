@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/17 00:37:16 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/17 01:31:45 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 void philo_eat(t_philo *p)
 {
-	// eat
 	pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
 	logger_log(p, MESSAGE_FORK);
 
@@ -26,8 +25,11 @@ void philo_eat(t_philo *p)
 	logger_log(p, MESSAGE_FORK);
 
 	logger_log(p, MESSAGE_EAT);
+
+	pthread_mutex_lock(&p->mutex_meal);
 	p->last_eat_time = get_time_ms();
-	printf("pid %u | last_eat_time: %lu\n",p->id, get_time_ms() - p->last_eat_time);
+	pthread_mutex_unlock(&p->mutex_meal);
+
 	sleep_ms(p->meta->args.time_to_eat);
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);

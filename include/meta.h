@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 19:13:08 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/17 01:25:54 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_args {
 typedef struct s_philo {
 	uint32_t		id;
 	t_meta 			*meta;
+	pthread_mutex_t mutex_meal;
 	pthread_t 		thread;
 	t_fork			*forks[PHILO_FORK_COUNT];
 	unsigned long 	last_eat_time;
