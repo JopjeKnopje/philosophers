@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 19:15:36 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/17 00:47:25 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "meta.h"
+
+static void philo_swap_forks(t_philo *p)
+{
+	if (p->id % 2)
+	{
+		t_fork *tmp = p->forks[PHILO_FORK_LEFT];
+		p->forks[PHILO_FORK_LEFT] = p->forks[PHILO_FORK_RIGHT];
+		p->forks[PHILO_FORK_RIGHT] = tmp;
+	}
+}
 
 static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_t id)
 {
@@ -29,7 +39,7 @@ static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_
 	p->id = id + 1;
 	p->forks[PHILO_FORK_LEFT] = forks[id];
 	p->forks[PHILO_FORK_RIGHT] = forks[(id + 1) % count];
-	p->eat_count = 0;
+	philo_swap_forks(p);
 	if (pthread_create(&p->thread, NULL, philo_main, p))
 	{
 		free(p);

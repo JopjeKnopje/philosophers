@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/09/15 18:39:06 by joppe         ########   odam.nl          #
+#    Updated: 2023/09/17 00:45:31 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ RUN_CMD := ./$(NAME)
 # CFLAGS += -Wall -Wextra -Werror
 # CFLAGS += -Wall -Wextra
 # CFLAGS += -g -fsanitize=thread
-CFLAGS += -g -fsanitize=address
+# CFLAGS += -g -fsanitize=address
 # CFLAGS = -g 
 
 SRC_DIR = src
@@ -50,7 +50,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(INCLUDE) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) Makefile 
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $< 
 
