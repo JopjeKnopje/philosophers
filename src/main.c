@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/17 01:42:32 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/17 20:37:28 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 #include <sys/time.h>
 #include <time.h>
 #include <unistd.h>
@@ -34,6 +35,11 @@ int sim_start(t_meta *meta)
 		printf("mutex_log failed\n");
 		return (0);
 	}
+	if (pthread_mutex_init(&meta->mutex_running, NULL))
+	{
+		printf("mutex_log failed\n");
+		return (0);
+	}
 	if (forks_init(meta, meta->args.philo_count))
 	{
 		printf("forks_init failed\n");
@@ -47,11 +53,29 @@ int sim_start(t_meta *meta)
 
 	meta->start_time = get_time_ms();
 	pthread_mutex_unlock(&meta->mutex_start);
+	sleep_ms(1);
 	monitor(meta);
 	return (1);
 }
 
-int sim_stop(t_meta *meta)
+void sim_stop(t_meta *meta)
+{
+	pthread_mutex_lock(&meta->mutex_running);
+	meta->sim_stop = true;
+	pthread_mutex_unlock(&meta->mutex_running);
+}
+
+bool sim_should_stop(t_meta *meta)
+{
+	bool	running;
+
+	pthread_mutex_lock(&meta->mutex_running);
+	running = meta->sim_stop;
+	pthread_mutex_unlock(&meta->mutex_running);
+	return (running);
+}
+
+int sim_cleanup(t_meta *meta)
 {
 	free_philos(meta);
 	free_forks(meta);
@@ -60,10 +84,13 @@ int sim_stop(t_meta *meta)
 
 int parse(t_args *args, int argc, char *argv[])
 {
+	(void) argc;
+	(void) argv;
+
 	args->philo_count = 5;
-	args->time_to_die = 1000;
-	args->time_to_eat = 900;
-	args->time_to_sleep = 300;
+	args->time_to_die = 2000;
+	args->time_to_eat = 1000;
+	args->time_to_sleep = 1000;
 	return (1);
 }
 
@@ -71,6 +98,7 @@ int philosophers(int argc, char *argv[])
 {
 	t_meta meta;
 
+	bzero(&meta, sizeof(t_meta));
 	// parse and set argv fields
 	if (!parse(&meta.args, argc, argv))
 		return (EXIT_FAILURE);
@@ -78,7 +106,7 @@ int philosophers(int argc, char *argv[])
 	if (!sim_start(&meta))
 		return (EXIT_FAILURE);
 	// stop sim
-	sim_stop(&meta);
+	sim_cleanup(&meta);
 	return (EXIT_SUCCESS);
 }
 

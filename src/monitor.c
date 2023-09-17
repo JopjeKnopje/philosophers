@@ -6,12 +6,13 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/17 01:43:24 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/17 20:51:12 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 #include <pthread.h>
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -23,28 +24,29 @@ static bool has_died(t_philo *p)
 	bool val;
 
 	pthread_mutex_lock(&p->mutex_meal);
-	val = (p->meta->args.time_to_die < get_time_ms() - p->last_eat_time);
+	val = (get_time_ms() - p->last_eat_time >= p->meta->args.time_to_die);
 	pthread_mutex_unlock(&p->mutex_meal);
 	return val;
 }
 
-static void *monitor_loop(t_meta *meta)
+static bool monitor_loop(t_meta *meta)
 {
-	size_t i = 0;
-	t_philo *p;
+	size_t	i; 
+	t_philo	*p;
 
+	i = 0;
 	while (i < meta->args.philo_count)
 	{
 		p = meta->philos[i];
-
 		if (has_died(p))
 		{
-			printf("pid [%u] | killed\n", p->id);
-			// philo_join(p);
+			sim_stop(p->meta);
+			logger_log(p, MESSAGE_DEAD);
+			return (false);
 		}
 		i++;
 	}
-	return (void *) 1;
+	return (true);
 }
 
 void *monitor(t_meta *meta)
@@ -52,7 +54,11 @@ void *monitor(t_meta *meta)
 	while (1)
 	{
 		if (!monitor_loop(meta))
-			break;
+		{
+			printf("monitor_loop returned false\n");
+			return (NULL);
+		}
+		usleep(1000);
 	}
 	return (NULL);
 }

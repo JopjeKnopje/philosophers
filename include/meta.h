@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/17 01:25:54 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/17 20:05:18 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,17 @@ typedef struct s_philo {
 typedef struct s_meta {
 	t_philo			**philos;
 	t_fork			**forks;
+	bool			sim_stop;
 	unsigned long 	start_time;
 	pthread_mutex_t mutex_log;
 	pthread_mutex_t mutex_start;
+	pthread_mutex_t mutex_running;
 	t_args 			args;
 }	t_meta;
+
+// main.c
+void		sim_stop(t_meta *meta);
+bool	sim_should_stop(t_meta *meta);
 
 // forks.c
 int8_t	forks_init(t_meta *meta, size_t count);
@@ -79,14 +85,14 @@ unsigned long	get_time_ms(void);
 void			sleep_ms(unsigned long ms);
 
 // philo.c
-int		philos_init(t_meta *meta, uint32_t count);
-void	*philo_main(void *arg);
-void	philo_join(t_philo *p);
+int			philos_init(t_meta *meta, uint32_t count);
+void		*philo_main(void *arg);
+void		philo_join(t_philo *p);
 
 // philo_action.c
-void	philo_eat(t_philo *p);
-void	philo_sleep(t_philo *p);
-void	philo_think(t_philo *p);
+void		philo_eat(t_philo *p);
+void		philo_sleep(t_philo *p);
+void		philo_think(t_philo *p);
 
 // threads.c
 pthread_t	*thread_init(void *(*routine)(void *), void *arg);

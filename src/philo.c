@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/17 01:26:25 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/17 20:14:12 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include "meta.h"
 
@@ -81,17 +82,12 @@ void *philo_main(void *arg)
 	pthread_mutex_lock(&p->meta->mutex_start);
 	pthread_mutex_unlock(&p->meta->mutex_start);
 
-	// take 2 forks
-	// eat with eat_time
-	// sleep for sleep_time
-	// think until forks are available
-	while (1)
+	while (!sim_should_stop(p->meta))
 	{
 		philo_eat(p);
 		philo_sleep(p);
 		philo_think(p);
 	}
-
 	return (p);
 }
 
