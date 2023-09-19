@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/19 16:52:33 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/19 17:32:00 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ void *philo_main(void *arg)
 {
 	t_philo *p = arg;
 
+	philo_update_eat_time(p);
 	pthread_mutex_lock(&p->meta->mutex_start);
 	pthread_mutex_unlock(&p->meta->mutex_start);
-	philo_update_eat_time(p);
 
 	while (!sim_should_stop(p->meta))
 	{
+		philo_think(p);
 		philo_eat(p);
 		philo_sleep(p);
-		philo_think(p);
 	}
 	return (p);
 }
@@ -95,6 +95,6 @@ void *philo_main(void *arg)
 void	philo_join(t_philo *p)
 {
 	pthread_join(p->thread, (void *) p);
-	printf("joined %d\n", p->id);
+	// printf("joined %d\n", p->id);
 	free(p);
 }

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/19 16:33:23 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/19 17:32:26 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ void *monitor(t_meta *meta)
 	while (1)
 	{
 		if (!monitor_loop(meta))
-		{
-			printf("monitor_loop returned false\n");
 			return (NULL);
-		}
 		usleep(1000);
 	}
 	return (NULL);
