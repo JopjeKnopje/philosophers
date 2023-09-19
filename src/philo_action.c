@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/17 01:31:45 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/19 15:55:56 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+
+void philo_update_eat_time(t_philo *p)
+{
+	pthread_mutex_lock(&p->mutex_meal);
+	p->last_eat_time = get_time_ms();
+	pthread_mutex_unlock(&p->mutex_meal);
+}
 
 void philo_eat(t_philo *p)
 {
@@ -25,12 +32,9 @@ void philo_eat(t_philo *p)
 	logger_log(p, MESSAGE_FORK);
 
 	logger_log(p, MESSAGE_EAT);
-
-	pthread_mutex_lock(&p->mutex_meal);
-	p->last_eat_time = get_time_ms();
-	pthread_mutex_unlock(&p->mutex_meal);
-
+	philo_update_eat_time(p);
 	sleep_ms(p->meta->args.time_to_eat);
+
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/17 20:37:28 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/19 16:51:59 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int sim_start(t_meta *meta)
 
 	meta->start_time = get_time_ms();
 	pthread_mutex_unlock(&meta->mutex_start);
-	sleep_ms(1);
+	usleep(80 * meta->args.philo_count);
 	monitor(meta);
 	return (1);
 }
@@ -88,9 +88,9 @@ int parse(t_args *args, int argc, char *argv[])
 	(void) argv;
 
 	args->philo_count = 5;
-	args->time_to_die = 2000;
-	args->time_to_eat = 1000;
-	args->time_to_sleep = 1000;
+	args->time_to_die = 200;
+	args->time_to_eat = 100;
+	args->time_to_sleep = 100;
 	return (1);
 }
 
