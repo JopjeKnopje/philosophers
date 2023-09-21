@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 23:34:21 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 18:38:50 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/21 15:50:43 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void free_philos(t_meta *meta)
 
 	while (i < meta->args.philo_count)
 	{
-		philo_join(meta->philos[i]);
+		philo_join(&meta->philos[i]);
 		i++;
 	}
 	free(meta->philos);

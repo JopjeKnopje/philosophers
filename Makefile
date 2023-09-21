@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/09/20 12:41:46 by jboeve        ########   odam.nl          #
+#    Updated: 2023/09/21 16:18:48 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,18 @@ INCLUDE := -Iinclude
 
 RUN_CMD := ./$(NAME)
 
+ifdef DEBUGM
+	CFLAGS += -g -fsanitize=address
+endif
+ifdef DEBUGT
+	CFLAGS += -g -fsanitize=thread
+endif
+
 # CFLAGS += -Wall -Wextra -Werror
 CFLAGS += -Wall -Wextra
+CFLAGS += -g 
 # CFLAGS += -g -fsanitize=thread
 # CFLAGS += -g -fsanitize=address
-CFLAGS = -g 
 
 SRC_DIR = src
 SRCS = main.c \
@@ -47,6 +54,14 @@ OBJS = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 all: $(NAME)
 
+debugt:
+	make fclean
+	make DEBUGT=1
+
+debugm:
+	make fclean
+	make DEBUGM=1
+
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(INCLUDE) -o $(NAME)
 
@@ -63,6 +78,12 @@ fclean: clean
 re: fclean all
 
 run: all
+	$(RUN_CMD)
+
+runt: debugt
+	$(RUN_CMD)
+
+runm: debugm
 	$(RUN_CMD)
 
 compile_commands: fclean

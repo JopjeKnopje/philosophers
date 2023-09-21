@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 11:58:50 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/21 16:15:12 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ static bool monitor_loop(t_meta *meta)
 	i = 0;
 	while (i < meta->args.philo_count)
 	{
-		p = meta->philos[i];
+		p = &meta->philos[i];
 		if (has_died(p))
 		{
 			logger_log(p, MESSAGE_DEAD);
-			sim_stop(p->meta);
+			sim_set_stop(p->meta);
 			return (false);
 		}
 		i++;

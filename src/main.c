@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/20 12:46:09 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/21 16:18:17 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <strings.h>
 #include <sys/time.h>
 #include <time.h>
@@ -40,6 +41,9 @@ int sim_start(t_meta *meta)
 		printf("mutex_log failed\n");
 		return (0);
 	}
+
+
+
 	if (forks_init(meta, meta->args.philo_count))
 	{
 		printf("forks_init failed\n");
@@ -48,6 +52,7 @@ int sim_start(t_meta *meta)
 	if (philos_init(meta, meta->args.philo_count))
 	{
 		printf("philos_init failed\n");
+		free_forks(meta);
 		return (0);
 	}
 
@@ -58,14 +63,14 @@ int sim_start(t_meta *meta)
 	return (1);
 }
 
-void sim_stop(t_meta *meta)
+void sim_set_stop(t_meta *meta)
 {
 	pthread_mutex_lock(&meta->mutex_running);
 	meta->sim_stop = true;
 	pthread_mutex_unlock(&meta->mutex_running);
 }
 
-bool sim_should_stop(t_meta *meta)
+bool sim_get_stop(t_meta *meta)
 {
 	bool	running;
 
@@ -87,8 +92,8 @@ int parse(t_args *args, int argc, char *argv[])
 	(void) argc;
 	(void) argv;
 
-	args->philo_count = 11;
-	args->time_to_die = 190;
+	args->philo_count = 3;
+	args->time_to_die = 200;
 	args->time_to_eat = 60;
 	args->time_to_sleep = 60;
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/19 15:52:36 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/21 16:15:17 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct s_philo {
 
 
 typedef struct s_meta {
-	t_philo			**philos;
-	t_fork			**forks;
+	t_philo			*philos;
+	t_fork			*forks;
 	bool			sim_stop;
 	unsigned long 	start_time;
 	pthread_mutex_t mutex_log;
@@ -72,12 +72,12 @@ typedef struct s_meta {
 }	t_meta;
 
 // main.c
-void		sim_stop(t_meta *meta);
-bool	sim_should_stop(t_meta *meta);
+void			sim_set_stop(t_meta *meta);
+bool			sim_get_stop(t_meta *meta);
 
 // forks.c
-int8_t	forks_init(t_meta *meta, size_t count);
-void	fork_destroy(t_fork *f);
+int8_t			forks_init(t_meta *meta, size_t count);
+void			fork_destroy(t_fork *f);
 
 // utils.c
 void			*ft_calloc(size_t nmemb, size_t size);
@@ -85,15 +85,11 @@ unsigned long	get_time_ms(void);
 void			sleep_ms(unsigned long ms);
 
 // philo.c
-int			philos_init(t_meta *meta, uint32_t count);
-void		*philo_main(void *arg);
-void		philo_join(t_philo *p);
+int				philos_init(t_meta *meta, uint32_t count);
+void			philo_join(t_philo *p);
 
 // philo_action.c
-void		philo_update_eat_time(t_philo *p);
-void		philo_eat(t_philo *p);
-void		philo_sleep(t_philo *p);
-void		philo_think(t_philo *p);
+void		*philo_main(void *arg);
 
 // threads.c
 pthread_t	*thread_init(void *(*routine)(void *), void *arg);

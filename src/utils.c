@@ -6,11 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 18:41:46 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/21 15:14:27 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
+#include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
 #include <unistd.h>

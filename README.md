@@ -39,12 +39,6 @@
 * A message announcing a philosopher died should be displayed no more than 10
   ms after the actual death of the philosopher.
 
-## TODO
-- [ ] Parse argsuments
-- [ ] Write a asymptotic `sleep_ms()`
-- [ ] Start working on measuring time to die.
-
-
 
 
 ## References

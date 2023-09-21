@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:17:25 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/15 15:43:29 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/21 16:13:21 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-static t_fork	*fork_init(uint32_t id)
+static t_fork	*fork_init(t_fork *f, uint32_t id)
 {
-	t_fork	*f;
-	f = ft_calloc(sizeof(t_fork), 1);
-	if (!f)
-		return (NULL);
 	if (pthread_mutex_init(&f->mutex, NULL))
 		return (NULL);
 	f->id = id;
@@ -33,13 +29,12 @@ int8_t	forks_init(t_meta *meta, size_t count)
 	uint32_t	i;
 
 	i = 0;
-	meta->forks = ft_calloc(sizeof(t_fork *), count);
+	meta->forks = ft_calloc(sizeof(t_fork), count);
 	if (!meta->forks)
 		return (1);
 	while (i < count)
 	{
-		meta->forks[i] = fork_init(i);
-		if (!meta->forks[i])
+		if (!fork_init(&meta->forks[i], i))
 			return (1);
 		i++;
 	}
@@ -49,5 +44,4 @@ int8_t	forks_init(t_meta *meta, size_t count)
 void fork_destroy(t_fork *f)
 {
 	pthread_mutex_destroy(&f->mutex);
-	free(f);
 }
