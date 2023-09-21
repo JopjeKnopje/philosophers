@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/20 12:56:11 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/21 11:58:50 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <wchar.h>
 
@@ -40,9 +41,8 @@ static bool monitor_loop(t_meta *meta)
 		p = meta->philos[i];
 		if (has_died(p))
 		{
-			sim_stop(p->meta);
 			logger_log(p, MESSAGE_DEAD);
-			dup2
+			sim_stop(p->meta);
 			return (false);
 		}
 		i++;
@@ -52,11 +52,7 @@ static bool monitor_loop(t_meta *meta)
 
 void *monitor(t_meta *meta)
 {
-	while (1)
-	{
-		if (!monitor_loop(meta))
-			return (NULL);
+	while (monitor_loop(meta))
 		usleep(1000);
-	}
 	return (NULL);
 }
