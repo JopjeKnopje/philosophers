@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 14:53:30 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/21 15:11:00 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_philo *philo_init(t_fork **forks, t_meta *meta, uint32_t count, uint32_
 	p->id = id + 1;
 	p->forks[PHILO_FORK_LEFT] = forks[id];
 	p->forks[PHILO_FORK_RIGHT] = forks[(id + 1) % count];
-	// philo_swap_forks(p);
+	philo_swap_forks(p);
 	if (pthread_mutex_init(&p->mutex_meal, NULL))
 	{
 		printf("mutex_init failed\n");
