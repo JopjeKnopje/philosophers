@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/19 17:32:26 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/20 12:56:11 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static bool monitor_loop(t_meta *meta)
 		{
 			sim_stop(p->meta);
 			logger_log(p, MESSAGE_DEAD);
+			dup2
 			return (false);
 		}
 		i++;
