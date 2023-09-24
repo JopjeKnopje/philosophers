@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/25 00:48:17 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/25 00:58:03 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int parse(t_args *args, int argc, char *argv[])
 	(void) argc;
 	(void) argv;
 
-	args->philo_count = 11;
-	args->time_to_die = 190;
+	args->philo_count = 10;
+	args->time_to_die = 130;
 	args->time_to_eat = 60;
 	args->time_to_sleep = 60;
 	return (1);

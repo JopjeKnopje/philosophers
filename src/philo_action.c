@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/25 00:48:53 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/25 00:59:09 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,12 @@ void *philo_main(void *arg)
 	philo_update_eat_time(p);
 	pthread_mutex_lock(&p->meta->mutex_start);
 	pthread_mutex_unlock(&p->meta->mutex_start);
+	if (p->id % 2)
+		usleep(100);
 
 	while (!sim_get_stop(p->meta))
 	{
-		// (*think_func)(p);
-		philo_think(p);
+		(*think_func)(p);
 		philo_eat(p);
 		philo_sleep(p);
 	}
