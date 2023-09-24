@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 15:14:27 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/24 21:46:33 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ unsigned long get_time_ms(void)
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000000) + tv.tv_usec) / 1000;
+	// return ((tv.tv_sec * 1000000) + tv.tv_usec) / 1000;
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
 void sleep_ms(unsigned long ms)
@@ -43,6 +44,6 @@ void sleep_ms(unsigned long ms)
 	unsigned long old = get_time_ms();
 	while (get_time_ms() - old < ms)
 	{
-		usleep(ms / (2 * 1000));
+		usleep(1000);
 	}
 }
