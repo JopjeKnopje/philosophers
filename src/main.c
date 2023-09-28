@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/25 00:58:03 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/28 12:53:03 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,33 @@ int sim_cleanup(t_meta *meta)
 
 int parse(t_args *args, int argc, char *argv[])
 {
-	(void) argc;
-	(void) argv;
+	argc--;
 
-	args->philo_count = 10;
-	args->time_to_die = 130;
-	args->time_to_eat = 60;
-	args->time_to_sleep = 60;
+	printf("argc: %d\n", argc);
+	if (argc >= 4)
+		return (0);
+
+
+	int i = 0;
+	uint32_t *ptr = (uint32_t *) args;
+	while (i < argc)
+	{
+		uint32_t num = ft_atoi(argv[i + 1]);
+		ptr[i] = num;
+		i++;
+	}
+
+	// args->philo_count = 3;
+	// args->time_to_die = 125;
+	// args->time_to_eat = 60;
+	// args->time_to_sleep = 60;
+
+	i = 0;
+	while (i < argc)
+	{
+		printf("[%i] -> %u\n", i, ptr[i]);
+		i++;
+	}
 	return (1);
 }
 
@@ -107,7 +127,10 @@ int philosophers(int argc, char *argv[])
 	bzero(&meta, sizeof(t_meta));
 	// parse and set argv fields
 	if (!parse(&meta.args, argc, argv))
+	{
+		fprintf(stderr, "Wrong input!\n");
 		return (EXIT_FAILURE);
+	}
 	// start sim (which is blocking)
 	if (!sim_start(&meta))
 		return (EXIT_FAILURE);

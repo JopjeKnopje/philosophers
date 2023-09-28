@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 16:15:17 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/09/28 12:42:47 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void			fork_destroy(t_fork *f);
 
 // utils.c
 void			*ft_calloc(size_t nmemb, size_t size);
+int				ft_atoi(const char *s);
 unsigned long	get_time_ms(void);
 void			sleep_ms(unsigned long ms);
 

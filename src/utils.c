@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/24 21:46:33 by joppe         ########   odam.nl         */
+/*   Updated: 2023/09/28 12:42:40 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,35 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
+int	ft_atoi(const char *s)
+{
+	int	i;
+	int	num;
+	int	sign;
+
+	num = 0;
+	sign = 0;
+	i = 0;
+	while (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
+		i++;
+	while ((s[i] == '-' || s[i] == '+') && !sign)
+	{
+		if (s[i] == '-')
+			sign = -1;
+		if (s[i] == '+')
+			sign = 1;
+		i++;
+	}
+	if (!sign)
+		sign = 1;
+	while (s[i] && s[i] >= '0' && s[i] <= '9')
+	{
+		num = num * 10 + s[i] - '0';
+		i++;
+	}
+	return (num * sign);
+}
+
 unsigned long get_time_ms(void)
 {
 	struct timeval tv;
@@ -47,3 +76,4 @@ void sleep_ms(unsigned long ms)
 		usleep(1000);
 	}
 }
+
