@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/13 13:58:37 by joppe         ########   odam.nl          #
+#    Updated: 2023/10/13 19:26:36 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,4 +91,4 @@ compile_commands: fclean
 	$(MAKE) | compiledb
 
 norm:
-	norminette include src 
+	norminette include src

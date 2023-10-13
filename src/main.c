@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 14:20:20 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 19:34:35 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,20 @@ int sim_cleanup(t_meta *meta)
 	return (1);
 }
 
+void print_args(t_args *args, size_t count)
+{
+	size_t i = 0;
+	int32_t *p_args = (int32_t *) args;
+
+	printf("---------------------\n");
+	while (i < count)
+	{
+		printf("args[%ld] -> [%d]\n", i, p_args[i]);
+		i++;
+	}
+
+}
+
 t_parse_error parse(t_args *args, int argc, char *argv[])
 {
 	long tmp;
@@ -97,6 +111,11 @@ t_parse_error parse(t_args *args, int argc, char *argv[])
 
 	if (argc < 5 || argc > 6)
 		return (PE_ARGS);
+
+	print_args(args, 5);
+
+	memset(args, -1, sizeof(t_args));
+	print_args(args, 5);
 
 	i = 0;
 	p_args = (int32_t *) args;
@@ -108,19 +127,24 @@ t_parse_error parse(t_args *args, int argc, char *argv[])
 		p_args[i] = tmp;
 		i++;
 	}
+
+
+
+	print_args(args, argc - 1);
 	return (PE_SUCCESS);
 }
 
 int philosophers(int argc, char *argv[])
 {
-	t_meta meta;
+	t_parse_error	err;
+	t_meta			meta;
 
 	bzero(&meta, sizeof(t_meta));
 
-	t_parse_error err = parse(&meta.args, argc, argv);
+	err = parse(&meta.args, argc, argv);
 	if (err)
 	{
-		write(stderr, PE_MESSAGES[err], ft_strlen(PE_MESSAGES[err]));
+		write(STDERR_FILENO, PE_MESSAGES[err], ft_strlen(PE_MESSAGES[err]));
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
