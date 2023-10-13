@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 23:44:02 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/14 00:04:06 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int philosophers(int argc, char *argv[])
 		write(STDERR_FILENO, PE_MESSAGES[err], ft_strlen(PE_MESSAGES[err]));
 		return (EXIT_FAILURE);
 	}
-	return EXIT_SUCCESS;
 	if (!sim_start(&meta))
 		return (EXIT_FAILURE);
 	sim_cleanup(&meta);

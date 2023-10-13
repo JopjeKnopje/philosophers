@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 16:20:50 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/14 00:33:49 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_philo *philo_init(t_philo *p, t_meta *meta, uint32_t i)
 
 int	philos_init(t_meta *meta, uint32_t count)
 {
-	uint32_t	i;
+	int32_t	i;
 
 	i = 0;
 	meta->philos = ft_calloc(sizeof(t_philo), count);

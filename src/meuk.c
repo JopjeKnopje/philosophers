@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 23:34:21 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 15:50:43 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/13 23:49:44 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void print_philos(t_philo *ps[], uint32_t count)
 
 void free_philos(t_meta *meta)
 {
-	uint32_t i = 0;
+	int32_t i = 0;
 
 	while (i < meta->args.philo_count)
 	{
