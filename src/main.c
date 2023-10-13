@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 14:16:48 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 14:20:20 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,19 @@ t_parse_error parse(t_args *args, int argc, char *argv[])
 {
 	long tmp;
 	int32_t i;
-	int32_t *ptr;
+	int32_t *p_args;
 
 	if (argc < 5 || argc > 6)
 		return (PE_ARGS);
 
 	i = 0;
-	ptr = (int32_t *) args;
+	p_args = (int32_t *) args;
 	while (i < argc - 1)
 	{
 		tmp = ft_atol(argv[i + 1]);
-		if (!tmp || (tmp < 0 || tmp > INT_MAX))
-		{
-			// TODO Handle NULL alloc
-			// TODO Handle overflow.
+		if (tmp < 0 || tmp > INT_MAX)
 			return (PE_OVERFLOW);
-		}
-		ptr[i] = tmp;
+		p_args[i] = tmp;
 		i++;
 	}
 	return (PE_SUCCESS);
@@ -124,7 +120,7 @@ int philosophers(int argc, char *argv[])
 	t_parse_error err = parse(&meta.args, argc, argv);
 	if (err)
 	{
-		fprintf(stderr, "%s", PE_MESSAGES[err]);
+		write(stderr, PE_MESSAGES[err], ft_strlen(PE_MESSAGES[err]));
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

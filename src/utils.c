@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 13:53:09 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 14:19:50 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,3 +77,12 @@ void sleep_ms(unsigned long ms)
 	}
 }
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
