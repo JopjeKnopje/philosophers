@@ -6,10 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/28 12:53:03 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/13 14:00:04 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include <pthread.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -90,31 +91,32 @@ int sim_cleanup(t_meta *meta)
 
 int parse(t_args *args, int argc, char *argv[])
 {
-	argc--;
+	long tmp;
+	int32_t i;
+	int32_t *ptr;
 
-	printf("argc: %d\n", argc);
-	if (argc >= 4)
+	if (argc < 5 || argc > 6)
 		return (0);
 
-
-	int i = 0;
-	uint32_t *ptr = (uint32_t *) args;
-	while (i < argc)
+	i = 0;
+	ptr = (int32_t *) args;
+	while (i < argc - 1)
 	{
-		uint32_t num = ft_atoi(argv[i + 1]);
-		ptr[i] = num;
+		tmp = ft_atol(argv[i + 1]);
+		if (!tmp || (tmp < 0 || tmp > INT_MAX))
+		{
+			// TODO Handle NULL alloc
+			// TODO Handle overflow.
+			return (0);
+		}
+		ptr[i] = tmp;
 		i++;
 	}
 
-	// args->philo_count = 3;
-	// args->time_to_die = 125;
-	// args->time_to_eat = 60;
-	// args->time_to_sleep = 60;
-
 	i = 0;
-	while (i < argc)
+	while (i < argc - 1)
 	{
-		printf("[%i] -> %u\n", i, ptr[i]);
+		printf("[%d] -> %u\n", i, ptr[i]);
 		i++;
 	}
 	return (1);
@@ -131,6 +133,8 @@ int philosophers(int argc, char *argv[])
 		fprintf(stderr, "Wrong input!\n");
 		return (EXIT_FAILURE);
 	}
+	return (EXIT_SUCCESS);
+
 	// start sim (which is blocking)
 	if (!sim_start(&meta))
 		return (EXIT_FAILURE);

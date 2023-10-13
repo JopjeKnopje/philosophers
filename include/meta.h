@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/28 12:42:47 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/13 13:57:36 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ typedef struct s_fork {
 }	t_fork;
 
 typedef struct s_args {
-	uint32_t	philo_count;
-	uint32_t 	time_to_die;
-	uint32_t	time_to_eat;
-	uint32_t	time_to_sleep;
+	int32_t	philo_count;
+	int32_t 	time_to_die;
+	int32_t	time_to_eat;
+	int32_t	time_to_sleep;
+	int32_t	max_eat_count;
 } t_args;
 
 typedef struct s_philo {
@@ -81,7 +82,7 @@ void			fork_destroy(t_fork *f);
 
 // utils.c
 void			*ft_calloc(size_t nmemb, size_t size);
-int				ft_atoi(const char *s);
+long			ft_atol(const char *s);
 unsigned long	get_time_ms(void);
 void			sleep_ms(unsigned long ms);
 

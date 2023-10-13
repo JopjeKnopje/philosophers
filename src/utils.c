@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/28 12:42:40 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/13 13:53:09 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (buffer);
 }
 
-int	ft_atoi(const char *s)
+long	ft_atol(const char *s)
 {
-	int	i;
-	int	num;
-	int	sign;
+	int		i;
+	int		sign;
+	long	num;
 
 	num = 0;
 	sign = 0;
