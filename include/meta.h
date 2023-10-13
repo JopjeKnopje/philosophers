@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 13:57:36 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 14:16:16 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,19 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
-
 typedef struct s_meta t_meta;
+
+typedef enum e_parse_error {
+	PE_SUCCESS,
+	PE_ARGS,
+	PE_OVERFLOW,
+} t_parse_error;
+
+const static char *PE_MESSAGES[] = {
+	NULL,
+ 	"usage: philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n",
+	"Integer overflow!\n",
+};
 
 typedef enum e_message {
 	MESSAGE_FORK,
@@ -44,7 +54,7 @@ typedef struct s_fork {
 
 typedef struct s_args {
 	int32_t	philo_count;
-	int32_t 	time_to_die;
+	int32_t	time_to_die;
 	int32_t	time_to_eat;
 	int32_t	time_to_sleep;
 	int32_t	max_eat_count;

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 14:00:04 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 14:16:48 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,14 @@ int sim_cleanup(t_meta *meta)
 	return (1);
 }
 
-int parse(t_args *args, int argc, char *argv[])
+t_parse_error parse(t_args *args, int argc, char *argv[])
 {
 	long tmp;
 	int32_t i;
 	int32_t *ptr;
 
 	if (argc < 5 || argc > 6)
-		return (0);
+		return (PE_ARGS);
 
 	i = 0;
 	ptr = (int32_t *) args;
@@ -107,19 +107,12 @@ int parse(t_args *args, int argc, char *argv[])
 		{
 			// TODO Handle NULL alloc
 			// TODO Handle overflow.
-			return (0);
+			return (PE_OVERFLOW);
 		}
 		ptr[i] = tmp;
 		i++;
 	}
-
-	i = 0;
-	while (i < argc - 1)
-	{
-		printf("[%d] -> %u\n", i, ptr[i]);
-		i++;
-	}
-	return (1);
+	return (PE_SUCCESS);
 }
 
 int philosophers(int argc, char *argv[])
@@ -127,10 +120,11 @@ int philosophers(int argc, char *argv[])
 	t_meta meta;
 
 	bzero(&meta, sizeof(t_meta));
-	// parse and set argv fields
-	if (!parse(&meta.args, argc, argv))
+
+	t_parse_error err = parse(&meta.args, argc, argv);
+	if (err)
 	{
-		fprintf(stderr, "Wrong input!\n");
+		fprintf(stderr, "%s", PE_MESSAGES[err]);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
