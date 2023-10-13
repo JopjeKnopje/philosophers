@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 14:19:58 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 23:43:55 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ typedef enum e_parse_error {
 	PE_ARGS,
 	PE_OVERFLOW,
 } t_parse_error;
-
-const static char *PE_MESSAGES[] = {
-	NULL,
- 	"usage: philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n",
-	"Integer overflow!\n",
-};
 
 typedef enum e_message {
 	MESSAGE_FORK,
@@ -91,11 +85,17 @@ int8_t			forks_init(t_meta *meta, size_t count);
 void			fork_destroy(t_fork *f);
 
 // utils.c
+void			sleep_ms(unsigned long ms);
+unsigned long	get_time_ms(void);
+
+// parse.c
+t_parse_error parse(t_args *args, int argc, char *argv[]);
+
+// libf2.c
 void			*ft_calloc(size_t nmemb, size_t size);
 long			ft_atol(const char *s);
-void			sleep_ms(unsigned long ms);
 size_t			ft_strlen(const char *s);
-unsigned long	get_time_ms(void);
+void			*ft_memset(void *s, int c, size_t n);
 
 // philo.c
 int				philos_init(t_meta *meta, uint32_t count);

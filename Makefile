@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/13 19:26:36 by joppe         ########   odam.nl          #
+#    Updated: 2023/10/13 23:17:08 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,15 @@ CFLAGS += -g -fsanitize=address
 
 SRC_DIR = src
 SRCS = main.c \
-	   philo.c \
-	   philo_action.c \
-	   forks.c \
-	   utils.c \
-	   monitor.c \
 	   free.c \
+	   parse.c \
+	   philo.c \
+	   forks.c \
+	   libf2.c \
+	   utils.c \
 	   logger.c \
+	   monitor.c \
+	   philo_action.c \
 	   meuk.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))

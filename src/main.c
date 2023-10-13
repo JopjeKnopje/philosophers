@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 19:34:35 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 23:44:02 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 #include <time.h>
 #include <unistd.h>
 #include "meta.h"
+
+const static char *PE_MESSAGES[] = {
+	NULL,
+ 	"usage: philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n",
+	"Integer overflow!\n",
+};
 
 int sim_start(t_meta *meta)
 {
@@ -89,70 +95,21 @@ int sim_cleanup(t_meta *meta)
 	return (1);
 }
 
-void print_args(t_args *args, size_t count)
-{
-	size_t i = 0;
-	int32_t *p_args = (int32_t *) args;
-
-	printf("---------------------\n");
-	while (i < count)
-	{
-		printf("args[%ld] -> [%d]\n", i, p_args[i]);
-		i++;
-	}
-
-}
-
-t_parse_error parse(t_args *args, int argc, char *argv[])
-{
-	long tmp;
-	int32_t i;
-	int32_t *p_args;
-
-	if (argc < 5 || argc > 6)
-		return (PE_ARGS);
-
-	print_args(args, 5);
-
-	memset(args, -1, sizeof(t_args));
-	print_args(args, 5);
-
-	i = 0;
-	p_args = (int32_t *) args;
-	while (i < argc - 1)
-	{
-		tmp = ft_atol(argv[i + 1]);
-		if (tmp < 0 || tmp > INT_MAX)
-			return (PE_OVERFLOW);
-		p_args[i] = tmp;
-		i++;
-	}
-
-
-
-	print_args(args, argc - 1);
-	return (PE_SUCCESS);
-}
-
 int philosophers(int argc, char *argv[])
 {
 	t_parse_error	err;
 	t_meta			meta;
 
-	bzero(&meta, sizeof(t_meta));
-
+	ft_memset(&meta, 0, sizeof(t_meta));
 	err = parse(&meta.args, argc, argv);
 	if (err)
 	{
 		write(STDERR_FILENO, PE_MESSAGES[err], ft_strlen(PE_MESSAGES[err]));
 		return (EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
-
-	// start sim (which is blocking)
+	return EXIT_SUCCESS;
 	if (!sim_start(&meta))
 		return (EXIT_FAILURE);
-	// stop sim
 	sim_cleanup(&meta);
 	return (EXIT_SUCCESS);
 }
