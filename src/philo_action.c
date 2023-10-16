@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 02:03:34 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/16 13:08:50 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 // TODO Make a structure that has a mutex paired with a field
 static void philo_update_eat_time(t_philo *p)
@@ -32,8 +33,19 @@ static void philo_update_eat_count(t_philo *p)
 	pthread_mutex_unlock(&p->mutex_eat_count);
 }
 
+static void philo_eat_single(t_philo *p)
+{
+	pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	logger_log(p, MESSAGE_FORK);
+
+}
+
 static void philo_eat(t_philo *p)
 {
+	if (p->meta->args.philo_count == 1)
+		return philo_eat_single(p);
+
+
 	pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
 	logger_log(p, MESSAGE_FORK);
 

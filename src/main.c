@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 02:26:22 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/16 12:50:15 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int sim_start(t_meta *meta)
 		printf("mutex_log failed\n");
 		return (0);
 	}
-
-
 
 	if (forks_init(meta, meta->args.philo_count))
 	{
