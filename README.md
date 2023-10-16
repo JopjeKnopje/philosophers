@@ -39,9 +39,6 @@
 * A message announcing a philosopher died should be displayed no more than 10
   ms after the actual death of the philosopher.
 
-## TODO
-- [ ] Maybe sync the start of each thread after creation.
-- [ ] Maybe print the `has died` message from the thread itself.
 
 
 ## References
@@ -49,6 +46,9 @@
 ### Mutexes
 https://stackoverflow.com/a/40880980
 
+
+### Volitile and atomic
+https://stackoverflow.com/questions/53032354/does-atomic-read-guarantees-reading-of-the-latest-value
 
 ## Stuff to learn
 

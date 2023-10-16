@@ -6,32 +6,29 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 15:20:39 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/13 19:43:38 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "meta.h"
+#include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
+#include <unistd.h>
 
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	size_t	buf_size;
-	void	*buffer;
-
-	buf_size = nmemb * size;
-	buffer = malloc(buf_size);
-	if (buffer)
-		memset(buffer, 0, buf_size);
-	else
-		return (NULL);
-	return (buffer);
-}
-
-long get_time(void)
+unsigned long get_time_ms(void)
 {
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * MICRO_TO_SECOND) + tv.tv_usec);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void sleep_ms(unsigned long ms)
+{
+	unsigned long old = get_time_ms();
+	while (get_time_ms() - old < ms)
+	{
+		usleep(1000);
+	}
 }

@@ -6,11 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 23:34:21 by joppe         #+#    #+#                 */
-/*   Updated: 2023/07/20 13:38:38 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/13 23:49:44 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "meta.h"
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -21,7 +22,7 @@ void print_philo(t_philo *p)
 
 void print_philos(t_philo *ps[], uint32_t count)
 {
-	int i = 0;
+	unsigned int	i = 0;
 	t_philo *p = ps[i];
 
 	while (i < count)
@@ -30,4 +31,16 @@ void print_philos(t_philo *ps[], uint32_t count)
 		i++;
 		print_philo(p);
 	}
+}
+
+void free_philos(t_meta *meta)
+{
+	int32_t i = 0;
+
+	while (i < meta->args.philo_count)
+	{
+		philo_join(&meta->philos[i]);
+		i++;
+	}
+	free(meta->philos);
 }
