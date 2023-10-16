@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/13 23:55:23 by joppe         ########   odam.nl          #
+#    Updated: 2023/10/16 02:26:40 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ endif
 # CFLAGS += -Wall -Wextra -Werror
 CFLAGS += -Wall -Wextra
 # CFLAGS += -g 
-# CFLAGS += -g -fsanitize=thread
-CFLAGS += -g -fsanitize=address
+CFLAGS += -g -fsanitize=thread
+# CFLAGS += -g -fsanitize=address
 
 SRC_DIR = src
 SRCS = main.c \
@@ -80,7 +80,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	$(RUN_CMD) 10 20 30 40
+	$(RUN_CMD) 5 190 60 60 2
 
 runt: debugt
 	$(RUN_CMD) 

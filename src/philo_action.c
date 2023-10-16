@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/28 12:14:18 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/16 02:03:34 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,19 @@
 #include <stdio.h>
 #include <unistd.h>
 
+// TODO Make a structure that has a mutex paired with a field
 static void philo_update_eat_time(t_philo *p)
 {
-	pthread_mutex_lock(&p->mutex_meal);
+	pthread_mutex_lock(&p->mutex_eat);
 	p->last_eat_time = get_time_ms();
-	pthread_mutex_unlock(&p->mutex_meal);
+	pthread_mutex_unlock(&p->mutex_eat);
+}
+
+static void philo_update_eat_count(t_philo *p)
+{
+	pthread_mutex_lock(&p->mutex_eat_count);
+	p->eat_count++;
+	pthread_mutex_unlock(&p->mutex_eat_count);
 }
 
 static void philo_eat(t_philo *p)
@@ -35,6 +43,8 @@ static void philo_eat(t_philo *p)
 	logger_log(p, MESSAGE_EAT);
 	philo_update_eat_time(p);
 	sleep_ms(p->meta->args.time_to_eat);
+
+	philo_update_eat_count(p);
 
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
@@ -50,9 +60,9 @@ static void	philo_think(t_philo *p)
 {
 	int32_t	time_to_think;
 
-	pthread_mutex_lock(&p->mutex_meal);
+	pthread_mutex_lock(&p->mutex_eat);
 	time_to_think = (p->meta->args.time_to_die - (get_time_ms() - p->last_eat_time) - p->meta->args.time_to_eat) / 3;
-	pthread_mutex_unlock(&p->mutex_meal);
+	pthread_mutex_unlock(&p->mutex_eat);
 	if (time_to_think < 0)
 		time_to_think = 0;
 	if (time_to_think > 600)

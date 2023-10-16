@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 23:55:58 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/16 02:17:27 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
+#define ARG_NOT_SET -1
 
 typedef struct s_meta t_meta;
 
@@ -57,17 +59,18 @@ typedef struct s_args {
 typedef struct s_philo {
 	uint32_t		id;
 	t_meta 			*meta;
-	pthread_mutex_t mutex_meal;
-	pthread_t 		thread;
 	t_fork			*forks[PHILO_FORK_COUNT];
+	int32_t 		eat_count;
+	pthread_mutex_t mutex_eat;
+	pthread_mutex_t mutex_eat_count;
 	unsigned long 	last_eat_time;
-	unsigned long 	eat_count;
+	pthread_t 		thread;
 }	t_philo;
 
 
 typedef struct s_meta {
-	t_philo			*philos;
 	t_fork			*forks;
+	t_philo			*philos;
 	bool			sim_stop;
 	unsigned long 	start_time;
 	pthread_mutex_t mutex_log;
@@ -100,6 +103,7 @@ void			*ft_memset(void *s, int c, size_t n);
 // philo.c
 int				philos_init(t_meta *meta, uint32_t count);
 void			philo_join(t_philo *p);
+int32_t			philo_get_eat_count(t_philo *p);
 
 // philo_action.c
 void		*philo_main(void *arg);

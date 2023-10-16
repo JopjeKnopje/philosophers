@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/13 22:49:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/14 00:07:45 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/16 02:24:04 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_parse_error	parse(t_args *args, int argc, char *argv[])
 
 	if (argc < 5 || argc > 6)
 		return (PE_ARGS);
-	ft_memset(args, -1, sizeof(t_args));
+	ft_memset(args, ARG_NOT_SET, sizeof(t_args));
 	i = 0;
 	p_args = (int32_t *) args;
 	while (i < argc - 1)
