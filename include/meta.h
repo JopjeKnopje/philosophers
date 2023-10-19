@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 02:17:27 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 13:44:56 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_meta {
 	bool			sim_stop;
 	unsigned long 	start_time;
 	pthread_mutex_t mutex_log;
-	pthread_mutex_t mutex_start;
+	pthread_mutex_t mutex_sync;
 	pthread_mutex_t mutex_running;
 	t_args 			args;
 }	t_meta;

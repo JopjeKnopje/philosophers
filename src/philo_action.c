@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 19:17:51 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 13:53:16 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ static void philo_eat(t_philo *p)
 
 	logger_log(p, MESSAGE_EAT);
 	philo_update_eat_time(p);
-	sleep_ms(p->meta->args.time_to_eat);
-
-	philo_update_eat_count(p);
-
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
 	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+	philo_update_eat_count(p);
+
+	sleep_ms(p->meta->args.time_to_eat);
 }
 
 static void philo_sleep(t_philo *p)
@@ -90,8 +89,8 @@ void *philo_main(void *arg)
 
 
 	philo_update_eat_time(p);
-	pthread_mutex_lock(&p->meta->mutex_start);
-	pthread_mutex_unlock(&p->meta->mutex_start);
+	pthread_mutex_lock(&p->meta->mutex_sync);
+	pthread_mutex_unlock(&p->meta->mutex_sync);
 	if (p->id % 2)
 		usleep(100);
 

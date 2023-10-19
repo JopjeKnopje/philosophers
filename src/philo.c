@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 02:15:56 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 13:50:59 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,9 @@
 
 static void philo_swap_forks(t_philo *p)
 {
-	if (p->id % 2)
-	{
-		t_fork *tmp = p->forks[PHILO_FORK_LEFT];
-		p->forks[PHILO_FORK_LEFT] = p->forks[PHILO_FORK_RIGHT];
-		p->forks[PHILO_FORK_RIGHT] = tmp;
-	}
+	t_fork *tmp = p->forks[PHILO_FORK_LEFT];
+	p->forks[PHILO_FORK_LEFT] = p->forks[PHILO_FORK_RIGHT];
+	p->forks[PHILO_FORK_RIGHT] = tmp;
 }
 
 static t_philo *philo_init(t_philo *p, t_meta *meta, uint32_t i)
@@ -35,7 +32,8 @@ static t_philo *philo_init(t_philo *p, t_meta *meta, uint32_t i)
 	p->id = i + 1;
 	p->forks[PHILO_FORK_LEFT] = &meta->forks[i];
 	p->forks[PHILO_FORK_RIGHT] = &meta->forks[(i + 1) % meta->args.philo_count];
-	philo_swap_forks(p);
+	if (p->id % 2)
+		philo_swap_forks(p);
 
 	if (pthread_mutex_init(&p->mutex_eat, NULL))
 		return (NULL);

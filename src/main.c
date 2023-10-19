@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 12:50:15 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 13:44:56 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ const static char *PE_MESSAGES[] = {
 
 int sim_start(t_meta *meta)
 {
-	if (pthread_mutex_init(&meta->mutex_start, NULL))
+	if (pthread_mutex_init(&meta->mutex_sync, NULL))
 	{
 		printf("mutex_init failed\n");
 		return (0);
 	}
-	pthread_mutex_lock(&meta->mutex_start);
+	pthread_mutex_lock(&meta->mutex_sync);
 
 	if (pthread_mutex_init(&meta->mutex_log, NULL))
 	{
@@ -62,7 +62,7 @@ int sim_start(t_meta *meta)
 	}
 
 	meta->start_time = get_time_ms();
-	pthread_mutex_unlock(&meta->mutex_start);
+	pthread_mutex_unlock(&meta->mutex_sync);
 	// usleep(80 * meta->args.philo_count);
 	usleep(1);
 	monitor(meta);
