@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/13 19:40:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/13 19:45:16 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 18:10:59 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (NULL);
 	return (buffer);
 }
-
 
 size_t	ft_strlen(const char *s)
 {

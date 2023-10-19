@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 13:50:59 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 18:37:55 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	philos_init(t_meta *meta, uint32_t count)
 	{
 		if (!philo_init(&meta->philos[i], meta, i))
 		{
+			// TODO Destroy mutex for all other philos.
 			free(meta->philos);
 			return (1);
 		}

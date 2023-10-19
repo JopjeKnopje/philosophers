@@ -6,20 +6,26 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 17:57:01 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 18:23:17 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 #include <unistd.h>
 
-const static char *PE_MESSAGES[] = {
-	NULL,
- 	"usage: philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n",
-	"Integer overflow!\n",
-};
+static const char	*get_pe_msgs(t_parse_error err)
+{
+	const static char	*pe_msgs[] = {
+		NULL,
+		"usage: philo number_of_philosophers time_to_die \
+time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n",
+		"Integer overflow!\n",
+	};
 
-int philosophers(int argc, char *argv[])
+	return (pe_msgs[err]);
+}
+
+int	philosophers(int argc, char *argv[])
 {
 	t_parse_error	err;
 	t_meta			meta;
@@ -28,7 +34,7 @@ int philosophers(int argc, char *argv[])
 	err = parse(&meta.args, argc, argv);
 	if (err)
 	{
-		write(STDERR_FILENO, PE_MESSAGES[err], ft_strlen(PE_MESSAGES[err]));
+		write(STDERR_FILENO, get_pe_msgs(err), ft_strlen(get_pe_msgs(err)));
 		return (EXIT_FAILURE);
 	}
 	if (!sim_start(&meta))
@@ -37,8 +43,7 @@ int philosophers(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	return philosophers(argc, argv);
+	return (philosophers(argc, argv));
 }
-

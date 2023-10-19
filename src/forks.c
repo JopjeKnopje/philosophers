@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:17:25 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 16:13:21 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 18:10:08 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int8_t	forks_init(t_meta *meta, size_t count)
 	return (0);
 }
 
-void fork_destroy(t_fork *f)
+void	fork_destroy(t_fork *f)
 {
 	pthread_mutex_destroy(&f->mutex);
 }

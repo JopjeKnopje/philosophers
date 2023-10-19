@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/13 22:49:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 02:24:04 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 18:32:53 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_number(const char *s)
 
 t_parse_error	parse(t_args *args, int argc, char *argv[])
 {
-	long 	tmp;
+	long	tmp;
 	int32_t	i;
 	int32_t	*p_args;
 
@@ -49,6 +49,7 @@ t_parse_error	parse(t_args *args, int argc, char *argv[])
 		p_args[i] = tmp;
 		i++;
 	}
+	// TODO Check if time-to-sleep > time-to-die or time-to-eat > time-to-die.
 	return (PE_SUCCESS);
 }
 

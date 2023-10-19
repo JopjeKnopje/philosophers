@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:24:18 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 13:48:26 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 18:30:29 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void sleep_ms(unsigned long ms)
 	unsigned long old = get_time_ms();
 	while (get_time_ms() - old < ms)
 	{
-		// check if has died
+		// TODO check if has died.
 		usleep(300);
 	}
 }
