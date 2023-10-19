@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 02:25:39 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 18:01:41 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool has_died(t_philo *p)
 	bool val;
 
 	pthread_mutex_lock(&p->mutex_eat);
-	val = (get_time_ms() - p->last_eat_time >= p->meta->args.time_to_die);
+	val = (get_time_ms() - p->last_eat_time >= (unsigned long) p->meta->args.time_to_die);
 	pthread_mutex_unlock(&p->mutex_eat);
 	return val;
 }
@@ -34,7 +34,7 @@ static bool monitor_loop(t_meta *meta)
 {
 	const bool monitor_eat = (meta->args.max_eat_count != ARG_NOT_SET);
 	int32_t done_eating_count;
-	size_t	i; 
+	int32_t	i; 
 	t_philo	*p;
 
 	done_eating_count = 0;

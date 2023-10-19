@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 16:17:07 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 18:03:40 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,10 @@ void	*monitor(t_meta *meta);
 
 // free.c
 void		free_forks(t_meta *meta);
+void		free_philos(t_meta *meta);
+int 		free_mutexes(pthread_mutex_t *arr, size_t len);
 
 // logger.c
 void		logger_log(t_philo *p, t_message status);
-
-// meuk.c
-void		print_philos(t_philo *ps[], uint32_t count);
-void		print_philo(t_philo *p);
-void		free_philos(t_meta *meta);
-void		free_threads(t_meta *meta);
 
 #endif

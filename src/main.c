@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 16:15:19 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 17:57:01 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,4 @@ int main(int argc, char *argv[])
 {
 	return philosophers(argc, argv);
 }
+

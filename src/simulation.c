@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/19 16:22:37 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 18:02:20 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
-static int free_mutexes(void *arr, size_t len)
+static int init_mutexes(pthread_mutex_t *arr, size_t len)
 {
-	pthread_mutex_t *ptr = arr;
-	size_t i = 0;
-
-	while (i < len)
-	{
-		pthread_mutex_destroy(&arr[i]);
-		i++;
-	}
-	return 0;
-}
-
-static int init_mutexes(void *arr, size_t len)
-{
-	pthread_mutex_t *ptr = arr;
 	size_t i = 0;
 
 	while (i < len)
@@ -79,7 +65,6 @@ bool sim_get_stop(t_meta *meta)
 {
 	bool	running;
 
-	// TODO Remote mutex
 	pthread_mutex_lock(&meta->mutex_running);
 	running = meta->sim_stop;
 	pthread_mutex_unlock(&meta->mutex_running);
