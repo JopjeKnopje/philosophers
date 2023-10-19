@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/20 00:24:15 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/20 00:29:09 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,13 @@ static bool	has_died(t_philo *p)
 	pthread_mutex_lock(&p->mutex_eat);
 	val = (get_time_ms() - p->last_eat_time >= ttd);
 	pthread_mutex_unlock(&p->mutex_eat);
-	return (val);
-}
 
-static bool	monitor_save_lines(t_philo *p)
-{
-	if (has_died(p))
+	if (val)
 	{
 		logger_log(p, MESSAGE_DEAD);
 		sim_set_stop(p->meta);
-		return (false);
 	}
-	return (true);
+	return (val);
 }
 
 static bool	monitor_loop(t_meta *meta)
@@ -49,7 +44,7 @@ static bool	monitor_loop(t_meta *meta)
 		p = &meta->philos[i];
 		if (monitor_eat && philo_get_eat_count(p) >= meta->args.max_eat_count)
 			done_eating_count++;
-		if (monitor_save_lines(p))
+		if (has_died(p))
 			return (false);
 		i++;
 	}
