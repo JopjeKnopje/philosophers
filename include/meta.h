@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 13:44:56 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 16:17:07 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ unsigned long	get_time_ms(void);
 
 // parse.c
 t_parse_error parse(t_args *args, int argc, char *argv[]);
+
+// simulation.c
+int	sim_cleanup(t_meta *meta);
+bool	sim_get_stop(t_meta *meta);
+void	sim_set_stop(t_meta *meta);
+int	sim_start(t_meta *meta);
 
 // libf2.c
 void			*ft_calloc(size_t nmemb, size_t size);

@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/19 13:43:33 by jboeve        ########   odam.nl          #
+#    Updated: 2023/10/19 16:12:10 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ifdef DEBUGT
 endif
 
 # CFLAGS += -Wall -Wextra -Werror
-CFLAGS += -Wall -Wextra
+# CFLAGS += -Wall -Wextra
 # CFLAGS += -g 
 # CFLAGS += -g -fsanitize=thread
 # CFLAGS += -g -fsanitize=address
@@ -80,7 +80,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	$(RUN_CMD) 1 190 60 60 2
+	$(RUN_CMD) 5 190 60 60
 
 runt: debugt
 	$(RUN_CMD) 
