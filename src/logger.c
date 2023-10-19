@@ -6,12 +6,11 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/09/13 16:41:06 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/19 23:18:42 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 23:45:51 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <pthread.h>
 #include <stdio.h>
 
 static const char	*get_log_msgs(t_message s)

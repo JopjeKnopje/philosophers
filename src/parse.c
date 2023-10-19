@@ -6,13 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/13 22:49:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 23:40:25 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 23:46:13 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 #include <limits.h>
-#include <stdio.h>
 
 static int	is_number(const char *s)
 {

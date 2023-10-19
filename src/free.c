@@ -6,12 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 18:52:05 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 18:10:48 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:45:39 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <stdint.h>
 
 void	free_forks(t_meta *meta)
 {

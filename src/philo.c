@@ -6,27 +6,22 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 18:37:55 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:32:07 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include "meta.h"
 
-static void philo_swap_forks(t_philo *p)
+static void	philo_swap_forks(t_philo *p)
 {
-	t_fork *tmp = p->forks[PHILO_FORK_LEFT];
+	t_fork	*tmp;
+
+	tmp = p->forks[PHILO_FORK_LEFT];
 	p->forks[PHILO_FORK_LEFT] = p->forks[PHILO_FORK_RIGHT];
 	p->forks[PHILO_FORK_RIGHT] = tmp;
 }
 
-static t_philo *philo_init(t_philo *p, t_meta *meta, uint32_t i)
+static t_philo	*philo_init(t_philo *p, t_meta *meta, uint32_t i)
 {
 	p->meta = meta;
 	p->id = i + 1;
@@ -34,7 +29,6 @@ static t_philo *philo_init(t_philo *p, t_meta *meta, uint32_t i)
 	p->forks[PHILO_FORK_RIGHT] = &meta->forks[(i + 1) % meta->args.philo_count];
 	if (p->id % 2)
 		philo_swap_forks(p);
-
 	if (pthread_mutex_init(&p->mutex_eat, NULL))
 		return (NULL);
 	if (pthread_mutex_init(&p->mutex_eat_count, NULL))
@@ -51,6 +45,7 @@ static t_philo *philo_init(t_philo *p, t_meta *meta, uint32_t i)
 	return (p);
 }
 
+// TODO Destroy mutex for all other philos.
 int	philos_init(t_meta *meta, uint32_t count)
 {
 	int32_t	i;
@@ -59,12 +54,10 @@ int	philos_init(t_meta *meta, uint32_t count)
 	meta->philos = ft_calloc(sizeof(t_philo), count);
 	if (!meta->philos)
 		return (0);
-
 	while (i < meta->args.philo_count)
 	{
 		if (!philo_init(&meta->philos[i], meta, i))
 		{
-			// TODO Destroy mutex for all other philos.
 			free(meta->philos);
 			return (1);
 		}
@@ -73,13 +66,13 @@ int	philos_init(t_meta *meta, uint32_t count)
 	return (0);
 }
 
-int32_t philo_get_eat_count(t_philo *p)
+int32_t	philo_get_eat_count(t_philo *p)
 {
 	int32_t	count;
+
 	pthread_mutex_lock(&p->mutex_eat_count);
 	count = p->eat_count;
 	pthread_mutex_unlock(&p->mutex_eat_count);
-
 	return (count);
 }
 

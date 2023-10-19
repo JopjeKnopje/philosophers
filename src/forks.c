@@ -6,15 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:17:25 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 18:10:08 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:45:32 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <stdint.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 static t_fork	*fork_init(t_fork *f, uint32_t id)
 {

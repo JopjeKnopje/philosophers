@@ -6,19 +6,17 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 18:26:26 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:44:28 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 #include <unistd.h>
 
-typedef const unsigned long t_x;
-
 static bool	has_died(t_philo *p)
 {
-	t_x		ttd = (unsigned long) p->meta->args.time_to_die;
-	bool	val;
+	const unsigned long	ttd = (unsigned long) p->meta->args.time_to_die;
+	bool				val;
 
 	pthread_mutex_lock(&p->mutex_eat);
 	val = (get_time_ms() - p->last_eat_time >= ttd);
@@ -29,9 +27,9 @@ static bool	has_died(t_philo *p)
 static bool	monitor_loop(t_meta *meta)
 {
 	const bool	monitor_eat = (meta->args.max_eat_count != ARG_NOT_SET);
-	int32_t done_eating_count;
-	int32_t	i; 
-	t_philo	*p;
+	int32_t		done_eating_count;
+	int32_t		i;
+	t_philo		*p;
 
 	done_eating_count = 0;
 	i = 0;

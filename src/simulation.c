@@ -6,31 +6,32 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/19 23:20:31 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 23:34:30 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
 
-static int init_mutexes(pthread_mutex_t *arr, size_t len)
+static int	init_mutexes(pthread_mutex_t *arr, size_t len)
 {
-	size_t i = 0;
+	size_t	i;
 
+	i = 0;
 	while (i < len)
 	{
 		if (pthread_mutex_init(&arr[i], NULL))
 		{
 			free_mutexes(arr, i);
-			return 1;
+			return (1);
 		}
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-int sim_start(t_meta *meta)
+int	sim_start(t_meta *meta)
 {
 	if (init_mutexes(&meta->mutex_log, 3))
 		return (0);
@@ -47,24 +48,21 @@ int sim_start(t_meta *meta)
 		free_forks(meta);
 		return (0);
 	}
-
-	// TODO Write
 	meta->start_time = get_time_ms();
-
 	pthread_mutex_unlock(&meta->mutex_sync);
 	usleep(1);
 	monitor(meta);
 	return (1);
 }
 
-void sim_set_stop(t_meta *meta)
+void	sim_set_stop(t_meta *meta)
 {
 	pthread_mutex_lock(&meta->mutex_running);
 	meta->sim_stop = true;
 	pthread_mutex_unlock(&meta->mutex_running);
 }
 
-bool sim_get_stop(t_meta *meta)
+bool	sim_get_stop(t_meta *meta)
 {
 	bool	running;
 
@@ -74,11 +72,10 @@ bool sim_get_stop(t_meta *meta)
 	return (running);
 }
 
-int sim_cleanup(t_meta *meta)
+int	sim_cleanup(t_meta *meta)
 {
 	free_philos(meta);
 	free_forks(meta);
-
 	if (pthread_mutex_destroy(&meta->mutex_sync))
 		return (0);
 	if (pthread_mutex_destroy(&meta->mutex_log))
