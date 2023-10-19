@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 23:32:07 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/20 00:25:15 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,6 @@ int	philos_init(t_meta *meta, uint32_t count)
 		i++;
 	}
 	return (0);
-}
-
-int32_t	philo_get_eat_count(t_philo *p)
-{
-	int32_t	count;
-
-	pthread_mutex_lock(&p->mutex_eat_count);
-	count = p->eat_count;
-	pthread_mutex_unlock(&p->mutex_eat_count);
-	return (count);
 }
 
 void	philo_join(t_philo *p)

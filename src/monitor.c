@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 23:44:28 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/20 00:24:15 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ static bool	has_died(t_philo *p)
 	return (val);
 }
 
+static bool	monitor_save_lines(t_philo *p)
+{
+	if (has_died(p))
+	{
+		logger_log(p, MESSAGE_DEAD);
+		sim_set_stop(p->meta);
+		return (false);
+	}
+	return (true);
+}
+
 static bool	monitor_loop(t_meta *meta)
 {
 	const bool	monitor_eat = (meta->args.max_eat_count != ARG_NOT_SET);
@@ -36,17 +47,10 @@ static bool	monitor_loop(t_meta *meta)
 	while (i < meta->args.philo_count)
 	{
 		p = &meta->philos[i];
-		if (monitor_eat)
-		{
-			if (philo_get_eat_count(p) >= meta->args.max_eat_count)
-				done_eating_count++;
-		}
-		if (has_died(p))
-		{
-			logger_log(p, MESSAGE_DEAD);
-			sim_set_stop(p->meta);
+		if (monitor_eat && philo_get_eat_count(p) >= meta->args.max_eat_count)
+			done_eating_count++;
+		if (monitor_save_lines(p))
 			return (false);
-		}
 		i++;
 	}
 	if (done_eating_count >= meta->args.philo_count)

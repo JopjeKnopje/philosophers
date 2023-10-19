@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 23:28:22 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/20 00:27:37 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,14 @@ long			ft_atol(const char *s);
 size_t			ft_strlen(const char *s);
 void			*ft_memset(void *s, int c, size_t n);
 
+// philo_eat.c
+void			philo_update_eat_count(t_philo *p);
+int32_t			philo_get_eat_count(t_philo *p);
+void			philo_update_eat_time(t_philo *p);
+
 // philo.c
 int				philos_init(t_meta *meta, uint32_t count);
 void			philo_join(t_philo *p);
-int32_t			philo_get_eat_count(t_philo *p);
 
 // philo_action.c
 void			*philo_main(void *arg);

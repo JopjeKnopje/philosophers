@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/19 23:11:17 by joppe         ########   odam.nl          #
+#    Updated: 2023/10/20 00:26:30 by joppe         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ endif
 # CFLAGS += -Wall -Wextra -Werror
 CFLAGS += -Wall -Wextra
 # CFLAGS += -g 
-CFLAGS += -g -fsanitize=thread
+# CFLAGS += -g -fsanitize=thread
 # CFLAGS += -g -fsanitize=address
 
 SRC_DIR = src
@@ -40,6 +40,7 @@ SRCS = main.c \
 	   logger.c \
 	   monitor.c \
 	   philo_action.c \
+	   philo_eat.c \
 	   simulation.c
 
 SRCS := $(addprefix $(SRC_DIR)/, $(SRCS))
@@ -80,7 +81,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	$(RUN_CMD) 5 190 60 60
+	$(RUN_CMD) 5 190 60 60 5
 
 runt: debugt
 	$(RUN_CMD) 
