@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/09/13 16:41:06 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/19 18:18:45 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:18:42 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static const char	*get_log_msgs(t_message s)
 {
-	static const char	*log_text[] = {
+	const char	*log_text[] = {
 		"%lu %u has taken a fork\n",
 		"%lu %u is eating\n",
 		"%lu %u is sleeping\n",

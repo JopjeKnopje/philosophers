@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/19 18:23:17 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:18:34 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static const char	*get_pe_msgs(t_parse_error err)
 {
-	const static char	*pe_msgs[] = {
+	const char	*pe_msgs[] = {
 		NULL,
 		"usage: philo number_of_philosophers time_to_die \
 time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n",

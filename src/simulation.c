@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/19 18:02:20 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:20:31 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int sim_start(t_meta *meta)
 {
 	if (init_mutexes(&meta->mutex_log, 3))
 		return (0);
+	pthread_mutex_lock(&meta->mutex_sync);
 	if (forks_init(meta, meta->args.philo_count))
 	{
 		free_mutexes(&meta->mutex_log, 3);
@@ -47,7 +48,9 @@ int sim_start(t_meta *meta)
 		return (0);
 	}
 
+	// TODO Write
 	meta->start_time = get_time_ms();
+
 	pthread_mutex_unlock(&meta->mutex_sync);
 	usleep(1);
 	monitor(meta);
