@@ -6,13 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/13 22:49:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/16 02:24:04 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/19 23:46:13 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 #include <limits.h>
-#include <stdio.h>
 
 static int	is_number(const char *s)
 {
@@ -30,7 +29,7 @@ static int	is_number(const char *s)
 
 t_parse_error	parse(t_args *args, int argc, char *argv[])
 {
-	long 	tmp;
+	long	tmp;
 	int32_t	i;
 	int32_t	*p_args;
 
@@ -49,7 +48,9 @@ t_parse_error	parse(t_args *args, int argc, char *argv[])
 		p_args[i] = tmp;
 		i++;
 	}
+	if (args->time_to_sleep > args->time_to_die)
+		args->time_to_sleep = args->time_to_die;
+	if (args->time_to_eat > args->time_to_die)
+		args->time_to_eat = args->time_to_die;
 	return (PE_SUCCESS);
 }
-
-

@@ -6,16 +6,17 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 18:52:05 by joppe         #+#    #+#                 */
-/*   Updated: 2023/09/21 16:14:02 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/19 23:45:39 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 
-void free_forks(t_meta *meta)
+void	free_forks(t_meta *meta)
 {
-	uint32_t i = 0;
-	
+	int32_t	i;
+
+	i = 0;
 	while (i < meta->args.philo_count)
 	{
 		fork_destroy(&meta->forks[i]);
@@ -24,3 +25,28 @@ void free_forks(t_meta *meta)
 	free(meta->forks);
 }
 
+void	free_philos(t_meta *meta)
+{
+	int32_t	i;
+
+	i = 0;
+	while (i < meta->args.philo_count)
+	{
+		philo_join(&meta->philos[i]);
+		i++;
+	}
+	free(meta->philos);
+}
+
+int	free_mutexes(pthread_mutex_t *arr, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		pthread_mutex_destroy(&arr[i]);
+		i++;
+	}
+	return (0);
+}
