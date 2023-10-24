@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/20 00:25:15 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/24 15:13:22 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static t_philo	*philo_init(t_philo *p, t_meta *meta, uint32_t i)
 	return (p);
 }
 
-// TODO Destroy mutex for all other philos.
 int	philos_init(t_meta *meta, uint32_t count)
 {
 	int32_t	i;
@@ -56,9 +55,12 @@ int	philos_init(t_meta *meta, uint32_t count)
 		return (0);
 	while (i < meta->args.philo_count)
 	{
-		if (!philo_init(&meta->philos[i], meta, i))
+		// Set "global var" to failed and check this var in the philo thread.
+		// if (!philo_init(&meta->philos[i], meta, i))
+		if (i == 3 || !philo_init(&meta->philos[i], meta, i))
 		{
-			free(meta->philos);
+			meta->philo_failed = true;
+			free_philos(meta->philos, i);
 			return (1);
 		}
 		i++;

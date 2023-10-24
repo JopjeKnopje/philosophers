@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/20 00:27:37 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/24 15:07:22 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_philo {
 }	t_philo;
 
 typedef struct s_meta {
+	bool 			philo_failed;
 	t_fork			*forks;
 	t_philo			*philos;
 	bool			sim_stop;
@@ -125,8 +126,8 @@ void			thread_destroy(pthread_t *t);
 void			*monitor(t_meta *meta);
 
 // free.c
-void			free_forks(t_meta *meta);
-void			free_philos(t_meta *meta);
+void	free_philos(t_philo *philos, size_t len);
+void			free_forks(t_fork *forks, size_t len);
 int				free_mutexes(pthread_mutex_t *arr, size_t len);
 
 // logger.c
