@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 16:14:19 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 18:41:09 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef enum e_message {
 	MESSAGE_SLEEP,
 	MESSAGE_THINK,
 	MESSAGE_DEAD,
+	MESSAGE_TEST,
 }	t_message;
 
 typedef enum e_philo_fork {
@@ -68,7 +69,7 @@ typedef struct s_meta {
 	t_philo			*philos;
 	bool			philo_failed;
 	bool			sim_stop;
-	unsigned long	start_time;
+	unsigned long	log_start_time;
 	pthread_mutex_t	mutex_log;
 	pthread_mutex_t	mutex_sync;
 	pthread_mutex_t	mutex_running;

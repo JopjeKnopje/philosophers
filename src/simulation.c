@@ -6,11 +6,12 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/25 16:16:13 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 18:41:27 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
+#include <stdio.h>
 #include <unistd.h>
 
 static int	init_mutexes(pthread_mutex_t *arr, size_t len)
@@ -34,7 +35,11 @@ int	sim_start(t_meta *meta)
 {
 	if (init_mutexes(&meta->mutex_log, 3))
 		return (0);
-	pthread_mutex_lock(&meta->mutex_sync);
+	if (pthread_mutex_lock(&meta->mutex_sync))
+	{
+		printf("sync mutex lock failed\n");
+		return 123;
+	}
 	if (forks_init(meta, meta->args.philo_count))
 	{
 		free_mutexes(&meta->mutex_log, 3);
@@ -47,9 +52,10 @@ int	sim_start(t_meta *meta)
 		free(meta->forks);
 		return (0);
 	}
-	meta->start_time = get_time_ms();
+	sleep(2);
+	meta->log_start_time = get_time_ms();
 	pthread_mutex_unlock(&meta->mutex_sync);
-	usleep(1);
+	// usleep(1);
 	monitor(meta);
 	return (1);
 }

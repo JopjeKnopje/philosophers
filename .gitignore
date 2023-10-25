@@ -4,3 +4,4 @@ compile_commands.json
 .cache/
 log.txt
 Session.vim
+philo

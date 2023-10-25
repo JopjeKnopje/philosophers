@@ -6,12 +6,12 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/25 16:35:45 by jboeve        ########   odam.nl          #
+#    Updated: 2023/10/25 18:32:16 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	:= philo
-INCLUDE := -Iinclude 
+INCLUDE := -Iinclude
 
 
 RUN_CMD := ./$(NAME)
@@ -23,10 +23,10 @@ ifdef DEBUGT
 	CFLAGS += -g -fsanitize=thread
 endif
 
-CFLAGS = -Wall -Wextra -Werror
-# CFLAGS += -Wall -Wextra
+# CFLAGS = -Wall -Wextra -Werror
+CFLAGS += -Wall -Wextra
 # CFLAGS += -g 
-# CFLAGS += -g -fsanitize=thread
+CFLAGS += -g -fsanitize=thread
 # CFLAGS += -g -fsanitize=address
 
 SRC_DIR = src

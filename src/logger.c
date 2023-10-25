@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/09/13 16:41:06 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/19 23:45:51 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/25 18:37:40 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static const char	*get_log_msgs(t_message s)
 		"%lu %u is sleeping\n",
 		"%lu %u is thinking\n",
 		"%lu %u died\n",
+		"%lu %u test_msg\n",
 	};
 
 	return (log_text[s]);
@@ -34,6 +35,6 @@ void	logger_log(t_philo *p, t_message status)
 		pthread_mutex_unlock(&p->meta->mutex_log);
 		return ;
 	}
-	printf(get_log_msgs(status), get_time_ms() - p->meta->start_time, p->id);
+	printf(get_log_msgs(status), get_time_ms() - p->meta->log_start_time, p->id);
 	pthread_mutex_unlock(&p->meta->mutex_log);
 }

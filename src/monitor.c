@@ -6,11 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 15:10:45 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 18:21:35 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
+#include <stdio.h>
 #include <unistd.h>
 
 static bool	has_died(t_philo *p)
@@ -18,9 +19,19 @@ static bool	has_died(t_philo *p)
 	const unsigned long	ttd = (unsigned long) p->meta->args.time_to_die;
 	bool				val;
 
+	unsigned long	let;
+
+
 	pthread_mutex_lock(&p->mutex_eat);
 	val = (get_time_ms() - p->last_eat_time >= ttd);
+	let = p->last_eat_time;
 	pthread_mutex_unlock(&p->mutex_eat);
+
+	
+	pthread_mutex_lock(&p->meta->mutex_log);
+	printf("philo[%d] | last_eat_time [%ld]\n", p->id, let);
+	pthread_mutex_unlock(&p->meta->mutex_log);
+
 	if (val)
 	{
 		logger_log(p, MESSAGE_DEAD);
