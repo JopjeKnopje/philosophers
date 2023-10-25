@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 15:07:04 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 16:14:19 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define ARG_NOT_SET -1
 
 typedef struct s_meta	t_meta;
+typedef struct s_philo	t_philo;
+typedef void			(*t_think_func) (t_philo *p);
 
 typedef enum e_parse_error {
 	PE_SUCCESS,
@@ -62,9 +64,9 @@ typedef struct s_philo {
 }	t_philo;
 
 typedef struct s_meta {
-	bool 			philo_failed;
 	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	bool			philo_failed;
 	bool			sim_stop;
 	unsigned long	start_time;
 	pthread_mutex_t	mutex_log;
@@ -106,6 +108,7 @@ void			philo_update_eat_time(t_philo *p);
 
 // philo.c
 int				philos_init(t_meta *meta, uint32_t count);
+t_think_func	philo_set_fun(t_philo *p, t_think_func f1, t_think_func f2);
 
 // philo_action.c
 void			*philo_main(void *arg);

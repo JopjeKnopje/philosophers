@@ -6,13 +6,12 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/25 15:07:32 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 16:16:13 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 #include <unistd.h>
-#include <stdio.h>
 
 static int	init_mutexes(pthread_mutex_t *arr, size_t len)
 {
