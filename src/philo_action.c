@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 14:50:22 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:59:53 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 
 static void	philo_eat(t_philo *p)
 {
-	pthread_mutex_lock(&p->forks[PHILO_FORK_LEFT]->mutex);
+	pthread_mutex_lock(p->forks[PHILO_FORK_LEFT]);
 	logger_log(p, MESSAGE_FORK);
-	pthread_mutex_lock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+	pthread_mutex_lock(p->forks[PHILO_FORK_RIGHT]);
 	logger_log(p, MESSAGE_FORK);
 	logger_log(p, MESSAGE_EAT);
 	philo_update_eat_time(p);
-	pthread_mutex_unlock(&p->forks[PHILO_FORK_LEFT]->mutex);
-	pthread_mutex_unlock(&p->forks[PHILO_FORK_RIGHT]->mutex);
+	pthread_mutex_unlock(p->forks[PHILO_FORK_LEFT]);
+	pthread_mutex_unlock(p->forks[PHILO_FORK_RIGHT]);
 	philo_update_eat_count(p);
 	sleep_ms(p->meta->args.time_to_eat);
 }

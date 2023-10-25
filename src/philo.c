@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 14:52:43 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:59:22 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	philo_swap_forks(t_philo *p)
 {
-	t_fork	*tmp;
+	pthread_mutex_t	*tmp;
 
 	tmp = p->forks[PHILO_FORK_LEFT];
 	p->forks[PHILO_FORK_LEFT] = p->forks[PHILO_FORK_RIGHT];

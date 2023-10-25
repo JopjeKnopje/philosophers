@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/25 14:53:28 by jboeve        ########   odam.nl          #
+#    Updated: 2023/10/25 15:07:55 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ ifdef DEBUGT
 	CFLAGS += -g -fsanitize=thread
 endif
 
-# CFLAGS += -Wall -Wextra -Werror
-CFLAGS += -Wall -Wextra
+CFLAGS += -Wall -Wextra -Werror
+# CFLAGS += -Wall -Wextra
 # CFLAGS += -g 
 # CFLAGS += -g -fsanitize=thread
 # CFLAGS += -g -fsanitize=address
