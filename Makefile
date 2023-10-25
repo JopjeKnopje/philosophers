@@ -6,11 +6,11 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/25 16:32:36 by jboeve        ########   odam.nl          #
+#    Updated: 2023/10/25 16:35:45 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 	:= app
+NAME 	:= philo
 INCLUDE := -Iinclude 
 
 
