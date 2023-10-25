@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/24 15:11:46 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:32:21 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	sim_start(t_meta *meta)
 	}
 	if (philos_init(meta, meta->args.philo_count))
 	{
-		pthread_mutex_unlock(&meta->mutex_sync);
 		free_mutexes(&meta->mutex_log, 3);
 		free_forks(meta->forks, meta->args.philo_count);
 		return (0);

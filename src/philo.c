@@ -6,11 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/24 15:13:22 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:30:55 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
+#include <stdio.h>
 
 static void	philo_swap_forks(t_philo *p)
 {
@@ -45,6 +46,14 @@ static t_philo	*philo_init(t_philo *p, t_meta *meta, uint32_t i)
 	return (p);
 }
 
+static void 	premature_fail_philos(t_meta *meta, size_t len)
+{
+	meta->philo_failed = true;
+	pthread_mutex_unlock(&meta->mutex_sync);
+	free_philos(meta->philos, len);
+}
+
+
 int	philos_init(t_meta *meta, uint32_t count)
 {
 	int32_t	i;
@@ -55,20 +64,12 @@ int	philos_init(t_meta *meta, uint32_t count)
 		return (0);
 	while (i < meta->args.philo_count)
 	{
-		// Set "global var" to failed and check this var in the philo thread.
-		// if (!philo_init(&meta->philos[i], meta, i))
 		if (i == 3 || !philo_init(&meta->philos[i], meta, i))
 		{
-			meta->philo_failed = true;
-			free_philos(meta->philos, i);
+			premature_fail_philos(meta, i);
 			return (1);
 		}
 		i++;
 	}
 	return (0);
-}
-
-void	philo_join(t_philo *p)
-{
-	pthread_join(p->thread, (void *) p);
 }

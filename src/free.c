@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 18:52:05 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/24 15:10:14 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:31:33 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	free_philos(t_philo *philos, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		philo_join(&philos[i]);
+		pthread_join(philos[i].thread, NULL);
+		// philo_join(&philos[i]);
 		i++;
 	}
 	free(philos);

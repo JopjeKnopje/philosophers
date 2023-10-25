@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/24 15:07:22 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:30:46 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void			philo_update_eat_time(t_philo *p);
 
 // philo.c
 int				philos_init(t_meta *meta, uint32_t count);
-void			philo_join(t_philo *p);
 
 // philo_action.c
 void			*philo_main(void *arg);
