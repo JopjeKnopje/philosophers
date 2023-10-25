@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/24 15:11:16 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:50:22 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ void	*philo_main(void *arg)
 	pthread_mutex_unlock(&p->meta->mutex_sync);
 
 	if (p->meta->philo_failed)
-	{
-		// TODO Test if this works
-		printf("philo returning null\n");
 		return (NULL);
-	}
 
 	if (p->id % 2)
 		usleep(100);

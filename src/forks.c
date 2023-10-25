@@ -6,17 +6,16 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/26 18:17:25 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/24 13:37:01 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:54:50 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
 
-static t_fork	*fork_init(t_fork *f, uint32_t id)
+static t_fork	*fork_init(t_fork *f)
 {
 	if (pthread_mutex_init(&f->mutex, NULL))
 		return (NULL);
-	f->id = id;
 	return (f);
 }
 
@@ -30,7 +29,7 @@ int8_t	forks_init(t_meta *meta, size_t count)
 		return (1);
 	while (i < count)
 	{
-		if (!fork_init(&meta->forks[i], i))
+		if (!fork_init(&meta->forks[i]))
 			return (1);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 14:30:46 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:53:51 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef enum e_philo_fork {
 
 typedef struct s_fork {
 	pthread_mutex_t	mutex;
-	uint32_t		id;
 }	t_fork;
 
 typedef struct s_args {

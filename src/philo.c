@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 14:30:55 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:52:43 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void 	premature_fail_philos(t_meta *meta, size_t len)
 	free_philos(meta->philos, len);
 }
 
-
 int	philos_init(t_meta *meta, uint32_t count)
 {
 	int32_t	i;
@@ -64,7 +63,7 @@ int	philos_init(t_meta *meta, uint32_t count)
 		return (0);
 	while (i < meta->args.philo_count)
 	{
-		if (i == 3 || !philo_init(&meta->philos[i], meta, i))
+		if (!philo_init(&meta->philos[i], meta, i))
 		{
 			premature_fail_philos(meta, i);
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/28 18:52:05 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 14:31:33 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 14:52:05 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_philos(t_philo *philos, size_t len)
 	while (i < len)
 	{
 		pthread_join(philos[i].thread, NULL);
-		// philo_join(&philos[i]);
 		i++;
 	}
 	free(philos);
@@ -36,7 +35,7 @@ void	free_forks(t_fork *forks, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		fork_destroy(&forks[i]);
+		pthread_mutex_destroy(&forks[i].mutex);
 		i++;
 	}
 	free(forks);
