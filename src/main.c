@@ -6,12 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/24 14:06:17 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 16:15:05 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <stdlib.h>
 #include <unistd.h>
 
 static const char	*get_pe_msgs(t_parse_error err)

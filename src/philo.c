@@ -6,12 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 14:59:22 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 16:15:50 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <stdio.h>
 
 static void	philo_swap_forks(t_philo *p)
 {
@@ -46,7 +45,7 @@ static t_philo	*philo_init(t_philo *p, t_meta *meta, uint32_t i)
 	return (p);
 }
 
-static void 	premature_fail_philos(t_meta *meta, size_t len)
+static void	premature_fail_philos(t_meta *meta, size_t len)
 {
 	meta->philo_failed = true;
 	pthread_mutex_unlock(&meta->mutex_sync);
@@ -71,4 +70,11 @@ int	philos_init(t_meta *meta, uint32_t count)
 		i++;
 	}
 	return (0);
+}
+
+t_think_func	philo_set_fun(t_philo *p, t_think_func f1, t_think_func f2)
+{
+	if (p->meta->args.philo_count % 2)
+		return (f1);
+	return (f2);
 }

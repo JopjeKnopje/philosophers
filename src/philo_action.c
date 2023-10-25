@@ -6,12 +6,11 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 14:59:53 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/25 16:15:57 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
-#include <stdio.h>
 #include <unistd.h>
 
 static void	philo_eat(t_philo *p)
@@ -51,28 +50,23 @@ static void	philo_think(t_philo *p)
 	sleep_ms(time_to_think);
 }
 
-static void	philo_think2(t_philo *p)
+static void	philo_thonk(t_philo *p)
 {
 	logger_log(p, MESSAGE_THINK);
 }
 
 void	*philo_main(void *arg)
 {
-	t_philo	*p;
-	void	(*think_func)(t_philo *);
+	t_philo			*p;
+	t_think_func	func;
 
 	p = arg;
-	if (p->meta->args.philo_count % 2)
-		think_func = philo_think;
-	else
-		think_func = philo_think2;
+	func = philo_set_fun(p, philo_think, philo_thonk);
 	philo_update_eat_time(p);
 	pthread_mutex_lock(&p->meta->mutex_sync);
 	pthread_mutex_unlock(&p->meta->mutex_sync);
-
 	if (p->meta->philo_failed)
 		return (NULL);
-
 	if (p->id % 2)
 		usleep(100);
 	if (p->meta->args.philo_count == 1)
@@ -82,7 +76,7 @@ void	*philo_main(void *arg)
 	}
 	while (!sim_get_stop(p->meta))
 	{
-		(*think_func)(p);
+		(*func)(p);
 		philo_eat(p);
 		philo_sleep(p);
 	}
