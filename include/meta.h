@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:59:49 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 23:55:23 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 
 typedef struct s_meta	t_meta;
 typedef struct s_philo	t_philo;
-typedef void			(*t_think_func) (t_philo *p);
 
 typedef enum e_parse_error {
 	PE_SUCCESS,
@@ -110,7 +109,6 @@ void			philo_init_eat_count_all(t_philo *p, size_t len);
 
 // philo.c
 int				philos_init(t_meta *meta, uint32_t count);
-t_think_func	philo_set_fun(t_philo *p, t_think_func f1, t_think_func f2);
 
 // philo_action.c
 void			*philo_main(void *arg);

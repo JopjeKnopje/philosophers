@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:23:26 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 23:55:26 by joppe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,4 @@ int	philos_init(t_meta *meta, uint32_t count)
 		i++;
 	}
 	return (0);
-}
-
-t_think_func	philo_set_fun(t_philo *p, t_think_func f1, t_think_func f2)
-{
-	if (p->id % 2)
-		return (f1);
-	return (f2);
 }
