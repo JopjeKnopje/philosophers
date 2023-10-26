@@ -6,11 +6,12 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:15:59 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:40:43 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
+#include <stdio.h>
 #include <unistd.h>
 
 static void	philo_eat(t_philo *p)
@@ -39,13 +40,14 @@ static void	philo_think(t_philo *p)
 	const int32_t	ttt = p->meta->args.time_to_eat;
 	int32_t			time_to_think;
 
-	pthread_mutex_lock(&p->mutex_eat);
+	pthread_mutex_lock(&p->mutex_eat_time);
 	time_to_think = (ttd - (get_time_ms() - p->last_eat_time) - ttt) / 3;
-	pthread_mutex_unlock(&p->mutex_eat);
+	pthread_mutex_unlock(&p->mutex_eat_time);
 	if (time_to_think < 0)
 		time_to_think = 0;
 	if (time_to_think > 600)
 		time_to_think = 200;
+	printf("think time [%d]\n", time_to_think);
 	logger_log(p, MESSAGE_THINK);
 	sleep_ms(time_to_think);
 }
@@ -62,6 +64,7 @@ void	*philo_main(void *arg)
 
 	p = arg;
 	func = philo_set_fun(p, philo_think, philo_thonk);
+	// func = philo_thonk;
 
 	pthread_mutex_lock(&p->meta->mutex_sync);
 	pthread_mutex_unlock(&p->meta->mutex_sync);

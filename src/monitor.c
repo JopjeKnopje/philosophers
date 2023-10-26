@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:18:46 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:32:01 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static bool	has_died(t_philo *p)
 	const unsigned long	ttd = (unsigned long) p->meta->args.time_to_die;
 	bool				val;
 
-	pthread_mutex_lock(&p->mutex_eat);
+	pthread_mutex_lock(&p->mutex_eat_time);
 	val = (get_time_ms() - p->last_eat_time >= ttd);
-	pthread_mutex_unlock(&p->mutex_eat);
+	pthread_mutex_unlock(&p->mutex_eat_time);
 	
 	if (val)
 	{

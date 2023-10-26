@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:32:41 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 15:33:39 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:23:26 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_philo {
 	t_meta			*meta;
 	pthread_mutex_t	*forks[PHILO_FORK_COUNT];
 	int32_t			eat_count;
-	pthread_mutex_t	mutex_eat;
+	pthread_mutex_t	mutex_eat_time;
 	pthread_mutex_t	mutex_eat_count;
 	unsigned long	last_eat_time;
 	pthread_t		thread;

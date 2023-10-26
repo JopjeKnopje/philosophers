@@ -6,7 +6,7 @@
 #    By: jboeve <jboeve@student.codam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/10/17 12:05:02 by jboeve        #+#    #+#                  #
-#    Updated: 2023/10/26 16:03:24 by jboeve        ########   odam.nl          #
+#    Updated: 2023/10/26 16:21:21 by jboeve        ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ fclean: clean
 re: fclean all
 
 run: all
-	$(RUN_CMD) 5 180 60 60 2 
+	$(RUN_CMD) 5 299 100 100
 
 runt: debugt
 	$(RUN_CMD) 
