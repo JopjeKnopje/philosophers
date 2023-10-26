@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:34:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:04:26 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:14:34 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,6 @@ int	philos_init(t_meta *meta, uint32_t count)
 t_think_func	philo_set_fun(t_philo *p, t_think_func f1, t_think_func f2)
 {
 	if (p->id % 2)
-	{
-		printf("assigning f1 to [%d]\n", p->id);
 		return (f1);
-	}
-	printf("assigning f2 to [%d]\n", p->id);
 	return (f2);
 }
