@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/20 00:25:12 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:23:26 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:59:29 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void	philo_update_eat_count(t_philo *p)
 	pthread_mutex_unlock(&p->mutex_eat_count);
 }
 
-void philo_init_eat_count_all(t_philo *p, size_t len)
+void	philo_init_eat_count_all(t_philo *p, size_t len)
 {
-	size_t	i = 0;
+	size_t	i;
+
+	i = 0;
 	while (i < len)
 	{
 		p[i].last_eat_time = get_time_ms();

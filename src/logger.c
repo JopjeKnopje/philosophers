@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/09/13 16:41:06 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/25 18:37:40 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:58:53 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ static const char	*get_log_msgs(t_message s)
 
 void	logger_log(t_philo *p, t_message status)
 {
+	unsigned long	start_time;
+
+	start_time = p->meta->log_start_time;
 	pthread_mutex_lock(&p->meta->mutex_log);
 	if (sim_get_stop(p->meta))
 	{
 		pthread_mutex_unlock(&p->meta->mutex_log);
 		return ;
 	}
-	printf(get_log_msgs(status), get_time_ms() - p->meta->log_start_time, p->id);
+	printf(get_log_msgs(status), get_time_ms() - start_time, p->id);
 	pthread_mutex_unlock(&p->meta->mutex_log);
 }

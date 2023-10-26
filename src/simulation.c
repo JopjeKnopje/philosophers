@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/26 16:40:20 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:59:41 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	sim_start(t_meta *meta)
 		return (0);
 	}
 	meta->log_start_time = get_time_ms();
-
 	philo_init_eat_count_all(meta->philos, meta->args.philo_count);
 	pthread_mutex_unlock(&meta->mutex_sync);
 	usleep(1);
@@ -64,10 +63,6 @@ void	sim_set_stop(t_meta *meta)
 	pthread_mutex_lock(&meta->mutex_running);
 	meta->sim_stop = true;
 	pthread_mutex_unlock(&meta->mutex_running);
-
-	// pthread_mutex_lock(&meta->mutex_log);
-	// printf("[%ld] sim_stop = true\n", get_time_ms() - meta->log_start_time);
-	// pthread_mutex_unlock(&meta->mutex_log);
 }
 
 bool	sim_get_stop(t_meta *meta)

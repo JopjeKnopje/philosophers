@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:44:50 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:59:14 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ void	*philo_main(void *arg)
 
 	p = arg;
 	func = philo_set_fun(p, philo_think, philo_thonk);
-	// func = philo_thonk;
-
 	pthread_mutex_lock(&p->meta->mutex_sync);
 	pthread_mutex_unlock(&p->meta->mutex_sync);
-
 	if (p->meta->philo_failed)
 		return (NULL);
 	if (p->id % 2)
