@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/26 15:33:18 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:01:25 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,16 @@ int	sim_start(t_meta *meta)
 {
 	if (init_mutexes(&meta->mutex_log, 3))
 		return (0);
-	if (pthread_mutex_lock(&meta->mutex_sync))
-	{
-		printf("sync mutex lock failed\n");
-		return 123;
-	}
+	pthread_mutex_lock(&meta->mutex_sync);
 	if (forks_init(meta, meta->args.philo_count))
 	{
+		pthread_mutex_unlock(&meta->mutex_sync);
 		free_mutexes(&meta->mutex_log, 3);
 		return (0);
 	}
 	if (philos_init(meta, meta->args.philo_count))
 	{
+		pthread_mutex_unlock(&meta->mutex_sync);
 		free_mutexes(&meta->mutex_log, 3);
 		free_mutexes(meta->forks, meta->args.philo_count);
 		free(meta->forks);
@@ -56,6 +54,7 @@ int	sim_start(t_meta *meta)
 
 	philo_init_eat_count_all(meta->philos, meta->args.philo_count);
 	pthread_mutex_unlock(&meta->mutex_sync);
+	usleep(1);
 	monitor(meta);
 	return (1);
 }

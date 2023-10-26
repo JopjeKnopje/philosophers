@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 15:36:34 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 15:56:20 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 static void	philo_eat(t_philo *p)
 {
-	pthread_mutex_lock(p->forks[PHILO_FORK_LEFT]);
-	logger_log(p, MESSAGE_FORK);
 	pthread_mutex_lock(p->forks[PHILO_FORK_RIGHT]);
+	logger_log(p, MESSAGE_FORK);
+	pthread_mutex_lock(p->forks[PHILO_FORK_LEFT]);
 	logger_log(p, MESSAGE_FORK);
 	logger_log(p, MESSAGE_EAT);
 	philo_update_eat_time(p);
-	pthread_mutex_unlock(p->forks[PHILO_FORK_LEFT]);
 	pthread_mutex_unlock(p->forks[PHILO_FORK_RIGHT]);
+	pthread_mutex_unlock(p->forks[PHILO_FORK_LEFT]);
 	philo_update_eat_count(p);
 	sleep_ms(p->meta->args.time_to_eat);
 }
@@ -61,15 +61,10 @@ void	*philo_main(void *arg)
 	t_think_func	func;
 
 	p = arg;
-	// func = philo_set_fun(p, philo_think, philo_thonk);
-	if (p->meta->args.philo_count % 2)
-		func = philo_think;
-	else
-		func = philo_thonk;
+	func = philo_set_fun(p, philo_think, philo_thonk);
 
 	pthread_mutex_lock(&p->meta->mutex_sync);
 	pthread_mutex_unlock(&p->meta->mutex_sync);
-	// philo_update_eat_time(p);
 
 	if (p->meta->philo_failed)
 		return (NULL);
