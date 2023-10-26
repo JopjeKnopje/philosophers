@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 16:40:43 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 16:44:50 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	philo_eat(t_philo *p)
 	logger_log(p, MESSAGE_FORK);
 	pthread_mutex_lock(p->forks[PHILO_FORK_LEFT]);
 	logger_log(p, MESSAGE_FORK);
-	logger_log(p, MESSAGE_EAT);
 	philo_update_eat_time(p);
+	logger_log(p, MESSAGE_EAT);
+	sleep_ms(p->meta->args.time_to_eat);
 	pthread_mutex_unlock(p->forks[PHILO_FORK_RIGHT]);
 	pthread_mutex_unlock(p->forks[PHILO_FORK_LEFT]);
 	philo_update_eat_count(p);
-	sleep_ms(p->meta->args.time_to_eat);
 }
 
 static void	philo_sleep(t_philo *p)
@@ -47,7 +47,6 @@ static void	philo_think(t_philo *p)
 		time_to_think = 0;
 	if (time_to_think > 600)
 		time_to_think = 200;
-	printf("think time [%d]\n", time_to_think);
 	logger_log(p, MESSAGE_THINK);
 	sleep_ms(time_to_think);
 }
