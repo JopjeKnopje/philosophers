@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 20:44:58 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 18:21:35 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 15:19:29 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static bool	has_died(t_philo *p)
 	pthread_mutex_unlock(&p->mutex_eat);
 
 	
-	pthread_mutex_lock(&p->meta->mutex_log);
-	printf("philo[%d] | last_eat_time [%ld]\n", p->id, let);
-	pthread_mutex_unlock(&p->meta->mutex_log);
-
+	// pthread_mutex_lock(&p->meta->mutex_log);
+	// printf("philo[%d] | last_eat_time [%ld]\n", p->id, let);
+	// pthread_mutex_unlock(&p->meta->mutex_log);
+	//
 	if (val)
 	{
 		logger_log(p, MESSAGE_DEAD);

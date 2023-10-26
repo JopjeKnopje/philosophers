@@ -6,12 +6,17 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/06/21 16:29:24 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/25 16:15:05 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 15:22:11 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "meta.h"
+#include <bits/pthreadtypes.h>
+#include <pthread.h>
+#include <stdlib.h>
+#include <sys/time.h>
 #include <unistd.h>
+#include <stdio.h>
 
 static const char	*get_pe_msgs(t_parse_error err)
 {
@@ -43,7 +48,7 @@ int	philosophers(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-int	main(int argc, char *argv[])
+int	main(int argc, char **argv)
 {
 	return (philosophers(argc, argv));
 }

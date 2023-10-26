@@ -6,7 +6,7 @@
 /*   By: jboeve <jboeve@student.codam.nl>            +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/10/19 16:12:27 by jboeve        #+#    #+#                 */
-/*   Updated: 2023/10/25 18:41:27 by jboeve        ########   odam.nl         */
+/*   Updated: 2023/10/26 15:33:18 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	sim_start(t_meta *meta)
 		free(meta->forks);
 		return (0);
 	}
-	sleep(2);
 	meta->log_start_time = get_time_ms();
+
+	philo_init_eat_count_all(meta->philos, meta->args.philo_count);
 	pthread_mutex_unlock(&meta->mutex_sync);
-	// usleep(1);
 	monitor(meta);
 	return (1);
 }
