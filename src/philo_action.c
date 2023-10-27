@@ -6,7 +6,7 @@
 /*   By: joppe <jboeve@student.codam.nl>             +#+                      */
 /*                                                  +#+                       */
 /*   Created: 2023/07/22 22:00:15 by joppe         #+#    #+#                 */
-/*   Updated: 2023/10/26 23:53:28 by joppe         ########   odam.nl         */
+/*   Updated: 2023/10/27 15:18:31 by jboeve        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	philo_sleep(t_philo *p)
 static void	philo_thonk(t_philo *p)
 {
 	logger_log(p, MESSAGE_THINK);
+	if (p->id % 2)
+		sleep_ms(1);
 }
 
 void	*philo_main(void *arg)
